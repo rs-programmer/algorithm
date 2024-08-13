@@ -6,14 +6,17 @@ project(algorithm)
 set(LIBPATH "${PROJECT_SOURCE_DIR}/lib")
 set(BINPATH "${PROJECT_SOURCE_DIR}/bin")
 
-set(STATIC 1)
-set(SHARED 0)
+set(STATIC ON)
+set(SHARED OFF)
 
 
 # 配置文件
 add_definitions(-DDEBUG)
 
+
 # test
 add_subdirectory(test)
 # src
 add_subdirectory(src)
+# tools
+add_subdirectory(tools)
