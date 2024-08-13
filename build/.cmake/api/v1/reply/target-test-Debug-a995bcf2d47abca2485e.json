@@ -75,6 +75,10 @@
 				{
 					"backtrace" : 3,
 					"path" : "/home/rs/works/algorithm/src/simple"
+				},
+				{
+					"backtrace" : 3,
+					"path" : "/home/rs/works/algorithm/tools"
 				}
 			],
 			"language" : "C",
@@ -89,6 +93,10 @@
 		{
 			"backtrace" : 3,
 			"id" : "simple::@050439f7583a4790457d"
+		},
+		{
+			"backtrace" : 3,
+			"id" : "tools::@b9a00e55f22b3d77656c"
 		}
 	],
 	"id" : "test::@36f028580bb02cc8272a",
@@ -116,6 +124,10 @@
 			{
 				"backtrace" : 3,
 				"fragment" : "../../lib/libsimple.a",
+				"role" : "libraries"
+			},
+			{
+				"fragment" : "../../lib/libtools.a",
 				"role" : "libraries"
 			}
 		],

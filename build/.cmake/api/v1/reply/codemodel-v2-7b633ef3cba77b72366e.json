@@ -9,7 +9,8 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						4
 					],
 					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
 					"minimumCMakeVersion" : 
@@ -63,6 +64,21 @@
 					[
 						0
 					]
+				},
+				{
+					"build" : "tools",
+					"jsonFile" : "directory-tools-Debug-f9645b0170a45a75eff2.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.20"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 4,
+					"source" : "tools",
+					"targetIndexes" : 
+					[
+						2
+					]
 				}
 			],
 			"name" : "Debug",
@@ -72,7 +88,8 @@
 					"childIndexes" : 
 					[
 						1,
-						2
+						2,
+						4
 					],
 					"directoryIndexes" : 
 					[
@@ -115,6 +132,18 @@
 					[
 						0
 					]
+				},
+				{
+					"directoryIndexes" : 
+					[
+						4
+					],
+					"name" : "tools",
+					"parentIndex" : 0,
+					"targetIndexes" : 
+					[
+						2
+					]
 				}
 			],
 			"targets" : 
@@ -122,16 +151,23 @@
 				{
 					"directoryIndex" : 3,
 					"id" : "simple::@050439f7583a4790457d",
-					"jsonFile" : "target-simple-Debug-444f44553304c8184f68.json",
+					"jsonFile" : "target-simple-Debug-134ff69d34479cd3d915.json",
 					"name" : "simple",
 					"projectIndex" : 3
 				},
 				{
 					"directoryIndex" : 1,
 					"id" : "test::@36f028580bb02cc8272a",
-					"jsonFile" : "target-test-Debug-02bf3d5398f25d0d79b6.json",
+					"jsonFile" : "target-test-Debug-a995bcf2d47abca2485e.json",
 					"name" : "test",
 					"projectIndex" : 1
+				},
+				{
+					"directoryIndex" : 4,
+					"id" : "tools::@b9a00e55f22b3d77656c",
+					"jsonFile" : "target-tools-Debug-2a842ff38e478c5cf359.json",
+					"name" : "tools",
+					"projectIndex" : 4
 				}
 			]
 		}

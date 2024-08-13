@@ -12,6 +12,7 @@
 		"commands" : 
 		[
 			"add_library",
+			"target_link_libraries",
 			"add_definitions",
 			"target_include_directories"
 		],
@@ -32,16 +33,22 @@
 				"parent" : 0
 			},
 			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 17,
+				"parent" : 0
+			},
+			{
 				"file" : 1
 			},
 			{
-				"command" : 1,
+				"command" : 2,
 				"file" : 1,
 				"line" : 14,
-				"parent" : 2
+				"parent" : 3
 			},
 			{
-				"command" : 2,
+				"command" : 3,
 				"file" : 0,
 				"line" : 14,
 				"parent" : 0
@@ -60,15 +67,19 @@
 			"defines" : 
 			[
 				{
-					"backtrace" : 3,
+					"backtrace" : 4,
 					"define" : "DEBUG"
 				}
 			],
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"path" : "/home/rs/works/algorithm/src/simple"
+				},
+				{
+					"backtrace" : 2,
+					"path" : "/home/rs/works/algorithm/tools"
 				}
 			],
 			"language" : "C",
@@ -76,6 +87,13 @@
 			[
 				0
 			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"backtrace" : 2,
+			"id" : "tools::@b9a00e55f22b3d77656c"
 		}
 	],
 	"id" : "simple::@050439f7583a4790457d",
