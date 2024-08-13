@@ -123,6 +123,12 @@
 		},
 		{
 			"path" : "test/CMakeLists.txt"
+		},
+		{
+			"path" : "src/CMakeLists.txt"
+		},
+		{
+			"path" : "src/simple/CMakeLists.txt"
 		}
 	],
 	"kind" : "cmakeFiles",
