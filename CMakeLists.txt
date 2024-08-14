@@ -11,12 +11,12 @@ set(SHARED OFF)
 
 
 # 配置文件
-add_definitions(-DDEBUG)
+# add_definitions(-DDEBUG)
 
-
-# test
-add_subdirectory(test)
 # src
 add_subdirectory(src)
 # tools
 add_subdirectory(tools)
+
+# test
+add_subdirectory(test)
