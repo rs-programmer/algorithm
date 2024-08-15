@@ -1,20 +1,5 @@
 #include "hash.h"
 
-// hash_char_t* malloc_hash_char() {
-//     hash_char_t* ret = (hash_char_t*)malloc(sizeof(hash_char_t));
-//     if (ret == NULL) {
-//         printf("malloc_hash_char error\n");
-//         return NULL;
-//     }
-
-//     ret->left = NULL;
-//     ret->right = NULL;
-//     ret->key = (char*)malloc(sizeof(char));
-//     *(ret->key) = '\0';
-
-//     return ret;
-// }
-
 void free_hash_char(hash_char_t *hash_char) {
     // 后序遍历，删除所有节点
     if (hash_char == NULL) {

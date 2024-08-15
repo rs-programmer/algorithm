@@ -12,11 +12,13 @@
 		[
 			"add_executable",
 			"target_link_directories",
-			"target_link_libraries"
+			"target_link_libraries",
+			"include_directories"
 		],
 		"files" : 
 		[
-			"test/CMakeLists.txt"
+			"test/CMakeLists.txt",
+			"CMakeLists.txt"
 		],
 		"nodes" : 
 		[
@@ -40,6 +42,15 @@
 				"file" : 0,
 				"line" : 9,
 				"parent" : 0
+			},
+			{
+				"file" : 1
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 6,
+				"parent" : 4
 			}
 		]
 	},
@@ -54,6 +65,10 @@
 			],
 			"includes" : 
 			[
+				{
+					"backtrace" : 5,
+					"path" : "/home/rs/works/algorithm/include"
+				},
 				{
 					"backtrace" : 3,
 					"path" : "/home/rs/works/algorithm/src/simple"

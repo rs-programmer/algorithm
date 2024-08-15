@@ -5,14 +5,11 @@
 
 int main()
 {
-    hash_char_t *hash_char = NULL;
-    hash_char = add_hash_char(hash_char, "aa");
-    hash_char = add_hash_char(hash_char, "bb");
-    hash_char = add_hash_char(hash_char, "cc");
 
-    hash_char = del_hash_char(hash_char, "bb");
+    char *p_str = "aaa";
+    char p_arr[] = {'a','a', 'a', '\0'};
 
-    free_hash_char(hash_char);
+    printf("k: %d\n", strcmp(p_str, p_arr));
 
     return 0;
 }
