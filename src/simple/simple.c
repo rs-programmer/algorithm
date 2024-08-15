@@ -1,6 +1,7 @@
 #include "simple.h"
 
-static void map_char_prosearch(map_char_t *map_char, char **p_str, int *minVal) {
+static void map_char_prosearch(map_char_t *map_char, char **p_str, int *minVal)
+{
     if (map_char == NULL) {
         return;
     }
@@ -15,7 +16,8 @@ static void map_char_prosearch(map_char_t *map_char, char **p_str, int *minVal) 
     map_char_prosearch(map_char->right, p_str, minVal);
 }
 
-char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
+char* mostCommonWord(char* paragraph, char** banned, int bannedSize)
+{
     // 字符串分割
     char *p_str = strtok(paragraph, " ");
     map_char_t *map_char = NULL;
@@ -55,12 +57,42 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize) {
     return min_p_str;
 }
 
+int* shortestToChar(char* s, char c, int* returnSize)
+{
+    int s_len = strlen(s);
+    // 创建内存空间
+    int *rets = (int*)malloc(sizeof(int) * s_len);
+    int *temp = (int*)malloc(sizeof(int) * s_len);
 
-int* shortestToChar(char* s, char c, int* returnSize) {
-    
+    // 查询字符串中 c 所在的位置
+    int c_id = 0;
+    for (int i = 0; i < s_len; i++) {
+        if (s[i] == c) {
+            temp[c_id++] = i;
+        }
+    }
+
+    // 计算每个字符的最小距离
+    for (int i = 0; i < s_len; i++) {
+        int min_dest = s_len;
+
+        for (int j = 0; j < c_id; j++) {
+            if (abs(i - temp[j]) < min_dest) {
+                min_dest = abs(i - temp[j]);
+            }
+        }
+
+        rets[i] = min_dest;
+    }
+
+    *returnSize = s_len;
+    return rets;
 }
 
-
+char* toGoatLatin(char* sentence)
+{
+    
+}
 
 
 

@@ -14,5 +14,6 @@
 
 char* mostCommonWord(char* paragraph, char** banned, int bannedSize);
 int* shortestToChar(char* s, char c, int* returnSize);
+char* toGoatLatin(char* sentence);
 
 #endif

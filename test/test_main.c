@@ -6,10 +6,10 @@
 int main()
 {
 
-    char *p_str = "aaa";
-    char p_arr[] = {'a','a', 'a', '\0'};
+    char *src = "aabbccdd";
+    char *des = "bccc";
 
-    printf("k: %d\n", strcmp(p_str, p_arr));
+    printf("kmp_str: %d\n", kmp_str(src, des));
 
     return 0;
 }
