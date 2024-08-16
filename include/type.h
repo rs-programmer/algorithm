@@ -8,11 +8,18 @@
 #include <string.h>
 #include <math.h>
 #include <stdbool.h>
+#include <ctype.h>
 
 typedef enum
 {
     ERROR = 0,
     SUCCESS = 1
 } ret_code_t;
+
+struct TreeNode {
+    int val;
+    struct TreeNode *left;
+    struct TreeNode *right;
+};
 
 #endif

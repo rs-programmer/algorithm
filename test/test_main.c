@@ -1,15 +1,9 @@
-#include <stdio.h>
-
-#include "hash.h"
-#include "tools.h"
+#include "simple.h"
 
 int main()
 {
 
-    char *src = "aabbccdd";
-    char *des = "bccc";
-
-    printf("kmp_str: %d\n", kmp_str(src, des));
-
+    bool ret = buddyStrings("aa", "aa");
+    printf("ret: %d\n", ret);
     return 0;
 }
