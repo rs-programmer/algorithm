@@ -466,3 +466,141 @@ bool leafSimilar(struct TreeNode* root1, struct TreeNode* root2)
 
     return true;
 }
+
+struct ListNode* middleNode(struct ListNode* head)
+{
+    if (head == NULL) {
+        return NULL;
+    }
+
+    // 定义
+    struct ListNode *mid = head;
+
+    int node_cnt = 1; // 节点个数
+    while (head != NULL) {
+        if (node_cnt % 2 == 0) {
+            mid = mid->next;
+        }
+
+        node_cnt++;
+        head = head->next;
+    }
+
+    return mid;
+}
+
+int projectionArea(int** grid, int gridSize, int* gridColSize)
+{
+    int row = gridSize;
+    int col = *gridColSize;
+
+    // xy 平面面积 = 非零元素个数
+    int area_xy = 0;
+    
+    // yz 平面面积 = 每一行的最大值之和
+    int area_yz = 0;
+    for (int i = 0; i < row; i++) {
+        // 统计每行的最大值
+        int max_row = 0;
+        for (int j = 0; j < col; j++) {
+            if (grid[i][j] > max_row) {
+                max_row = grid[i][j];
+            }
+
+            if (grid[i][j] != 0) {
+                area_xy++;
+            }
+        }
+
+        area_yz += max_row;
+    }
+
+    // xz 平面面积 = 每列的最大值之和
+    int area_xz = 0;
+    for (int i = 0; i < col; i++) {
+        // 统计每列的最大值
+        int max_col = 0;
+        for (int j = 0; j < row; j++) {
+            if (grid[j][i] > max_col) {
+                max_col = grid[j][i];
+            }
+        }
+
+        area_xz += max_col;
+    }
+
+    return area_xy + area_yz + area_xz;
+}
+
+char** uncommonFromSentences(char* s1, char* s2, int* returnSize)
+{
+    *returnSize = 0;
+
+    // 内容拷贝 常量字符串不可修改
+    int s1_len = strlen(s1);
+    int s2_len = strlen(s2);
+    *returnSize = 0;
+
+    char **ans_arr = (char**)malloc(sizeof(char*) * (s1_len + s2_len));
+
+    // 合并 s1 s2
+    char *p_arr = (char*)malloc(sizeof(s1) * (s1_len + s2_len + 2));
+    strcpy(p_arr, s1);
+    p_arr[s1_len] = ' ';
+    strcpy(p_arr + s1_len + 1, s2);
+
+    // 整合为二维数组
+    char **tar_arr = (char**)malloc(sizeof(char*) * (s1_len + s2_len));
+    int tar_arr_len = 0;
+
+    char *p_tok = strtok(p_arr, " ");
+    while (p_tok != NULL) {
+        char *tmp = (char*)malloc(sizeof(char) * (strlen(p_tok) + 1));
+        strcpy(tmp, p_tok);
+        tar_arr[tar_arr_len] = tmp;
+        tar_arr_len++;
+        p_tok = strtok(NULL, " ");
+    }
+
+    // 销毁 p_arr
+    free(p_arr);
+    p_arr = NULL;
+
+    // 统计 tar_arr 中仅出现一次的字符串
+    for (int i = 0; i < tar_arr_len; i++) {
+        int j;
+        for (j = 0; j < tar_arr_len; j++) {
+            if (i == j) {
+                continue;
+            }
+
+            if (strcmp(tar_arr[i], tar_arr[j]) == 0) {
+                // 出现相同
+                break;
+            }
+        }
+
+        if (j == tar_arr_len) {
+            // 仅出现一次
+            char *tmp = (char*)malloc(sizeof(char) * (strlen(tar_arr[i]) + 1));
+            strcpy(tmp, tar_arr[i]);
+            ans_arr[*returnSize] = tmp;
+            *returnSize += 1;
+        }
+    }
+
+    // 销毁 tar_arr
+    for (int i = 0; i < tar_arr_len; i++) {
+        free(tar_arr[i]);
+    }
+    free(tar_arr);
+    tar_arr = NULL;
+
+    return ans_arr;
+}
+
+int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSizesSize, int* returnSize)
+{
+    
+}
+

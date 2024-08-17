@@ -22,4 +22,9 @@ struct TreeNode {
     struct TreeNode *right;
 };
 
+struct ListNode {
+    int val;
+    struct ListNode *next;
+};
+
 #endif

@@ -25,6 +25,9 @@ bool lemonadeChange(int* bills, int billsSize);
 int** transpose(int** matrix, int matrixSize, int* matrixColSize, int* returnSize, int** returnColumnSizes);
 int binaryGap(int n);
 bool leafSimilar(struct TreeNode* root1, struct TreeNode* root2);
-
+struct ListNode* middleNode(struct ListNode* head);
+int projectionArea(int** grid, int gridSize, int* gridColSize);
+char** uncommonFromSentences(char* s1, char* s2, int* returnSize);
+int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSizesSize, int* returnSize);
 
 #endif
