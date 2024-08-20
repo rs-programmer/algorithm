@@ -43,7 +43,7 @@ map_char_t* add_map_char(map_char_t *map_char, const char *str, int val) {
     }
 }
 
-ret_code_t find_map_char(const map_char_t *map_char, const char *str, int *val) {
+RET_CODE_T find_map_char(const map_char_t *map_char, const char *str, int *val) {
     // 先序查找
     if (map_char == NULL) {
         return ERROR;

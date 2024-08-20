@@ -29,5 +29,11 @@ struct ListNode* middleNode(struct ListNode* head);
 int projectionArea(int** grid, int gridSize, int* gridColSize);
 char** uncommonFromSentences(char* s1, char* s2, int* returnSize);
 int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSizesSize, int* returnSize);
+int surfaceArea(int** grid, int gridSize, int* gridColSize);
+bool isMonotonic(int* nums, int numsSize);
+struct TreeNode* increasingBST(struct TreeNode* root);
+int* sortArrayByParity(int* nums, int numsSize, int* returnSize);
+
+
 
 #endif

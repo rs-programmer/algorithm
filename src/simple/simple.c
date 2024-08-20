@@ -601,6 +601,181 @@ char** uncommonFromSentences(char* s1, char* s2, int* returnSize)
 
 int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSizesSize, int* returnSize)
 {
+    /* 由数学计算可知，2*(x1-x2) = k; (m1 + x1) - (m2 + x2) = k*/
     
+    /* 采用 hash 数据结构实现 */
+    int sum_alic = 0;
+    int sum_bob = 0;
+
+    hash_int_t *hash_bob = NULL;
+
+    for (int i = 0; i < aliceSizesSize; i++) {
+        sum_alic += aliceSizes[i];
+    }
+
+    for (int i = 0; i < bobSizesSize; i++) {
+        hash_bob = add_hash_int(hash_bob, bobSizes[i]);
+        sum_bob += bobSizes[i];
+    }
+
+    int k = sum_alic - sum_bob;
+
+    /* 查找数据 */
+    int *ans = (int*)malloc(sizeof(int) * 2);
+    *returnSize = 2;
+
+    for (int i = 0; i <aliceSizesSize; i++) {
+        int alic = aliceSizes[i];
+        int bob = alic - (k / 2);
+
+        if (find_hash_int(hash_bob, bob) == 0) {
+            /* 找到相关元素 */
+            ans[0] = alic;
+            ans[1] = bob;
+            break;
+        }
+    }
+
+    free_hash_int(hash_bob);
+
+    return ans;
 }
 
+
+int surfaceArea(int** grid, int gridSize, int* gridColSize)
+{
+    int area_sum = 0;
+    int min_hight = 0;
+
+    for (int row = 0; row < gridSize; row++) {
+        for (int col = 0; col < gridColSize[row]; col++) {
+            /* 先计算总面积 */
+            if (grid[row][col] > 0) {
+                area_sum += (2 + grid[row][col] * 4);
+            }
+
+            /* 下一行需要剪掉的面积 */
+            if (row < gridSize - 1) {
+                min_hight = min_int(grid[row][col], grid[row+1][col]);
+                area_sum -= min_hight * 2;
+            }
+
+            /* 下一列需要剪掉的面积 */
+            if (col < gridColSize[row] - 1) {
+                min_hight = min_int(grid[row][col], grid[row][col+1]);
+                area_sum -= min_hight * 2;
+            }
+        }
+    }
+
+    return area_sum;
+}
+
+bool isMonotonic(int* nums, int numsSize)
+{
+    /* 数据趋势标志 */
+    int k = 0;
+
+    for (int i = 0; i < numsSize - 1; i++) {
+        if (k == 0) {
+            if (nums[i + 1] > nums[i]) {
+                k = 1; /* 升序 */
+            } else if (nums[i + 1] < nums[i]) {
+                k = -1; /* 降序 */
+            } else {
+                k = 0; /* 平序 */
+            }
+        } else if (k == 1) {
+            /* 升序的情况 */
+            if (nums[i + 1] < nums[i]) {
+                return false;
+            }
+        } else if (k == -1) {
+            /* 降序的情况 */
+            if (nums[i + 1] > nums[i]) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
+/*  ================================ */
+struct TreeNode* createRightTree(struct TreeNode* root, int val)
+{
+    /* 创建一个新的节点 */
+    struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    node->left = NULL;
+    node->right = NULL;
+    node->val = val;
+
+    if (root == NULL) {
+        /* 当前为头节点 */
+        return node;
+    }
+
+    root->right = node;
+    return node;
+}
+
+void treeNodeBST(struct TreeNode* root, struct TreeNode** p, struct TreeNode** head)
+{
+    /* 中序遍历 */
+    if (root == NULL) {
+        return;
+    }
+
+    treeNodeBST(root->left, p, head);
+
+    /* 中间 */
+    if (*p == NULL) {
+        *p = createRightTree(*p, root->val);
+        *head = *p;
+    } else {
+        *p = createRightTree(*p, root->val);
+    }
+
+    treeNodeBST(root->right, p, head);
+}
+
+struct TreeNode* increasingBST(struct TreeNode* root)
+{
+    struct TreeNode *p = NULL;
+    struct TreeNode *head = NULL;
+    treeNodeBST(root, &p, &head);
+
+    return head;
+}
+
+int* sortArrayByParity(int* nums, int numsSize, int* returnSize)
+{
+    /* 双指针法 偶数在前，奇数在后 */
+    int *ans_arr = (int*)malloc(sizeof(int) * numsSize);
+    *returnSize = numsSize;
+
+    int left = 0, right = numsSize - 1;
+    while (left <= right) {
+        /* left 查询奇数 */
+        while ((left <= right) && (nums[left] % 2 == 0)) {
+            ans_arr[left] = nums[left];
+            left++;
+        }
+
+        /* right 查询偶数 */
+        while ((left <= right) && (nums[right] % 2 != 0)) {
+            ans_arr[right] = nums[right];
+            right--;
+        }
+
+        /* 交换 left right */
+        if (left <= right) {
+            ans_arr[left] = nums[right];
+            ans_arr[right] = nums[left];
+            left++;
+            right--;
+        }
+    }
+
+    return ans_arr;
+}

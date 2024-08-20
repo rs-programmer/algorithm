@@ -3,6 +3,7 @@
         "type.h": "c",
         "tools.h": "c",
         "hash.h": "c",
-        "map.h": "c"
+        "map.h": "c",
+        "random": "c"
     }
 }

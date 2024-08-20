@@ -14,7 +14,13 @@ typedef enum
 {
     ERROR = 0,
     SUCCESS = 1
-} ret_code_t;
+} RET_CODE_T;
+
+// 枚举
+typedef enum {
+    PARAM_CHAR = 0,
+    PARAM_INT,
+} TYPE_T;
 
 struct TreeNode {
     int val;
