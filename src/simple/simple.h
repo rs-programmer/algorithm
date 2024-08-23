@@ -38,5 +38,7 @@ int smallestRangeI(int* nums, int numsSize, int k);
 bool hasGroupsSizeX(int* deck, int deckSize);
 char* reverseOnlyLetters(char* s);
 int* sortArrayByParityII(int* nums, int numsSize, int* returnSize);
+bool isLongPressedName(char* name, char* typed);
+int numUniqueEmails(char** emails, int emailsSize);
 
 #endif

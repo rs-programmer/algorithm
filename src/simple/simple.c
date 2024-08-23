@@ -875,6 +875,143 @@ char* reverseOnlyLetters(char* s)
 
 int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
 {
-    
+    if (numsSize % 2 != 0) {
+        *returnSize = 0;
+        return NULL;
+    }
+
+    /* 创建数组 */
+    int *ans = (int*)malloc(sizeof(int) * numsSize);
+    *returnSize = numsSize;
+    int id_i = 0, id_j = 1;
+    for (int i = 0; i < numsSize; i++) {
+        if (nums[i] % 2 == 0) {
+            /* 偶数 */
+            ans[id_i] = nums[i];
+            id_i += 2;
+        } else {
+            /* 奇数 */
+            ans[id_j] = nums[i];
+            id_j += 2;
+        }
+    }
+
+    return ans;
+}
+
+bool isLongPressedName(char* name, char* typed)
+{
+    /* 顺序查找，保证name，type中的字符顺序保持一致 */
+    int name_len = strlen(name);
+    int typed_len = strlen(typed);
+
+    /* 下标 */
+    int name_id = 0, typed_id = 0;
+    int name_count = 1, typed_count = 1;
+
+    while (name_id < name_len - 1) {
+        /* 查找 name 中相同字符的长度 */
+        while ((name_id < name_len - 1) && 
+              (name[name_id] == name[name_id + 1])) {
+            name_id++;
+            name_count++;
+        }
+
+        /* 查找 typed 中相同字符的长度 */
+        while ((typed_id < typed_len - 1) &&
+              (typed[typed_id] == typed[typed_id + 1])) {
+            typed_id++;
+            typed_count++;
+        }
+
+        /* typed_id 先到*/
+        if ((name_id < name_len - 1) &&
+           (typed_id >= typed_len - 1)) {
+            return false;
+        }
+
+        /* 判断长度 内容判断 */
+        if ((typed_count < name_count) || 
+           (name[name_id] != typed[typed_id])) {
+            return false;
+        } else {
+            name_count = 1;
+            typed_count = 1;
+            name_id += 1;
+            typed_id += 1; /* 前进一步 */
+        }
+    }
+
+    /* 检测最后一个单词 */
+    while (typed_id < typed_len) {
+        if (name[name_id] != typed[typed_id]) {
+            return false;
+        }
+        typed_id += 1;
+    }
+
+    return true;
+}
+
+int numUniqueEmails(char** emails, int emailsSize)
+{
+    char **ans = (char**)malloc(sizeof(char*) * emailsSize);
+    int ans_len = 0;
+
+    for (int i = 0; i < emailsSize; i++) {
+        char *buf = (char*)malloc(sizeof(char) * (strlen(emails[i]) + 1));
+        int buf_len = 0;
+
+        char *em = emails[i];
+        int em_len = strlen(em);
+        int k;
+
+        /* 处理本地名 */
+        for (k = 0; k < em_len; k++) {
+            if (em[k] == '.') {
+                continue;
+            }
+
+            if (em[k] == '+') {
+                /* 一直寻找到 @ */
+                while ((em[k] != '@') && (k < em_len)) {
+                    k++;
+                }
+
+                break;
+            }
+
+            if (em[k] == '@') {
+                break;
+            }
+
+            buf[buf_len++] = em[k];
+        }
+
+        /* 添加域名 */
+        for (; k < em_len; k++) {
+            buf[buf_len++] = em[k];
+        }
+        buf[buf_len] = '\0';
+
+        /* 判断是否出现重复 */
+        int x;
+        for (x = 0; x < ans_len; x++) {
+            if (strcmp(buf, ans[x]) == 0) {
+                break;
+            }
+        }
+
+        if (x == ans_len) {
+            ans[ans_len++] = buf;
+        }
+    }
+
+    /* 销毁内存数据 */
+    for (int i = 0; i < ans_len; i++) {
+        free(ans[i]);
+    }
+    free(ans);
+    return ans_len;
 }
 
