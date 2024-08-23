@@ -14,4 +14,15 @@ bool kmp_str(char *src, char *des);
 #define min_int(x, y) (x < y? x : y)
 #define max_int(x, y) (x > y? x : y)
 
+/* 辗转相除法 */
+/**
+ * 1. m >= n
+ * 2. m % n = q...r
+ * 3. m = n, n = r
+ * 4. 重复2--3
+ */
+int gcd(int m, int n);
+
+bool isChar(char c);
+
 #endif

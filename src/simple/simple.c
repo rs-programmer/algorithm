@@ -779,3 +779,102 @@ int* sortArrayByParity(int* nums, int numsSize, int* returnSize)
 
     return ans_arr;
 }
+
+int smallestRangeI(int* nums, int numsSize, int k)
+{
+    /* 直接对数组元素进行排序处理 */
+    fast_sort(nums, 0, numsSize - 1);
+    int min = nums[0];
+    int max = nums[numsSize - 1];
+
+    int n = max - min - 2 * k;
+    if (n <= 0) {
+        return 0;
+    } else {
+        return n;
+    }
+}
+
+void hasGroupMap(map_int_t *map, int *nums, int *len)
+{
+    /* 先序遍历所有节点，并记录所有节点数，并判断各个节点的数据是否一致 */
+    if (map == NULL) {
+        return;
+    }
+
+    nums[*len] = map->val;
+    *len += 1;
+    hasGroupMap(map->left, nums, len);
+    hasGroupMap(map->right, nums, len);
+}
+
+bool hasGroupsSizeX(int* deck, int deckSize)
+{
+    if (deckSize <= 1) {
+        return false;
+    }
+    
+    /* hash_map 构建数据结构 */
+    map_int_t *map = NULL;
+    for (int i = 0; i < deckSize; i++) {
+        map = add_map_int(map, deck[i], 1);
+    }
+
+    /* 查询所有节点，是否存在公约数 */
+    int *nums = (int*)malloc(sizeof(int) * deckSize);
+    int len = 0;
+    hasGroupMap(map, nums, &len);
+
+    /* 判断数组类的所有数据，是否存在最大公约数 */
+    fast_sort(nums, 0, len - 1);
+    int x = nums[0];
+    for (int i = len - 1; i >= 0; i--) {
+        x = gcd(x, nums[i]);
+        if (x == 1) {
+            return false;
+        }
+    }
+
+    free_map_int(map);
+    free(nums);
+
+    return true;
+}
+
+char* reverseOnlyLetters(char* s)
+{
+    int len = strlen(s);
+    char *ans = (char*)malloc(sizeof(char) * (len + 1));
+    strcpy(ans, s);
+
+    int left = 0, right = len - 1;
+
+    while (left < right) {
+        /* 左侧寻找字符元素 */
+        while (left < right && !isChar(ans[left])) {
+            left++;
+        }
+
+        /* 右侧寻找字符元素 */
+        while (left < right && !isChar(ans[right])) {
+            right--;
+        }
+
+        /* 交换 */
+        if (left < right) {
+            char ch = ans[left];
+            ans[left] = ans[right];
+            ans[right] = ch;
+            left++;
+            right--;
+        }
+    }
+
+    return ans;
+}
+
+int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
+{
+    
+}
+

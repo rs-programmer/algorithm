@@ -4,6 +4,7 @@
         "tools.h": "c",
         "hash.h": "c",
         "map.h": "c",
-        "random": "c"
+        "random": "c",
+        "sort.h": "c"
     }
 }

@@ -58,3 +58,17 @@ bool kmp_str(char *src, char *des)
 
     return false;
 }
+
+int gcd(int m, int n)
+{
+    if (n == 0) {
+        return m;
+    }
+
+    return gcd(n, m % n);
+}
+
+bool isChar(char c)
+{
+    return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
+}

@@ -10,6 +10,7 @@
 #include "hash.h"
 #include "map.h"
 #include "stack.h"
+#include "sort.h"
 
 #include "type.h"
 
@@ -33,7 +34,9 @@ int surfaceArea(int** grid, int gridSize, int* gridColSize);
 bool isMonotonic(int* nums, int numsSize);
 struct TreeNode* increasingBST(struct TreeNode* root);
 int* sortArrayByParity(int* nums, int numsSize, int* returnSize);
-
-
+int smallestRangeI(int* nums, int numsSize, int k);
+bool hasGroupsSizeX(int* deck, int deckSize);
+char* reverseOnlyLetters(char* s);
+int* sortArrayByParityII(int* nums, int numsSize, int* returnSize);
 
 #endif
