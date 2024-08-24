@@ -11,6 +11,7 @@
 #include "map.h"
 #include "stack.h"
 #include "sort.h"
+#include "queue.h"
 
 #include "type.h"
 
@@ -40,5 +41,13 @@ char* reverseOnlyLetters(char* s);
 int* sortArrayByParityII(int* nums, int numsSize, int* returnSize);
 bool isLongPressedName(char* name, char* typed);
 int numUniqueEmails(char** emails, int emailsSize);
+
+typedef struct {
+    loop_queue_int_t *queue;
+} RecentCounter;
+RecentCounter* recentCounterCreate();
+int recentCounterPing(RecentCounter* obj, int t);
+void recentCounterFree(RecentCounter* obj);
+
 
 #endif

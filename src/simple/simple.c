@@ -1015,3 +1015,37 @@ int numUniqueEmails(char** emails, int emailsSize)
     return ans_len;
 }
 
+
+/* 类 */
+RecentCounter* recentCounterCreate()
+{
+    RecentCounter* ans = (RecentCounter*)malloc(sizeof(RecentCounter));
+    ans->queue = create_loop_queue_int(3010);
+    return ans;
+}
+
+int recentCounterPing(RecentCounter* obj, int t)
+{
+    /* 先去掉不满足条件的数据 */
+    while (!isEmpty_loop_queue_int(obj->queue)) {
+        int front = get_front_loop_queue_int(obj->queue);
+        if (front < t - 3000) {
+            /* 出队列 */
+            pop_loop_queue_int(obj->queue, NULL);
+        } else {
+            /* 跳出循环 */
+            break;
+        }
+    }
+
+    /* 入队列 */
+    push_loop_queue_int(obj->queue, t);
+    return obj->queue->size;
+}
+
+void recentCounterFree(RecentCounter* obj)
+{
+    free_loop_queue_int(obj->queue);
+    free(obj);
+}
+
