@@ -49,5 +49,16 @@ RecentCounter* recentCounterCreate();
 int recentCounterPing(RecentCounter* obj, int t);
 void recentCounterFree(RecentCounter* obj);
 
-
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
 #endif
