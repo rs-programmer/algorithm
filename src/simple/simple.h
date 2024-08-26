@@ -58,6 +58,6 @@ int repeatedNTimes(int* nums, int numsSize);
 bool isUnivalTree(struct TreeNode* root);
 int largestPerimeter(int* nums, int numsSize);
 int* sortedSquares(int* nums, int numsSize, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
+int* oArrayForm(int* num, int numSize, int k, int* returnSize);
 
 #endif
