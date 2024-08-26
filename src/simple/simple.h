@@ -49,5 +49,12 @@ RecentCounter* recentCounterCreate();
 int recentCounterPing(RecentCounter* obj, int t);
 void recentCounterFree(RecentCounter* obj);
 
-
+int recentCounterPing(RecentCounter* obj, int t);
+void recentCounterFree(RecentCounter* obj);
+int recentCounterPing(RecentCounter* obj, int t);
+void recentCounterFree(RecentCounter* obj);
+int recentCounterPing(RecentCounter* obj, int t);
+void recentCounterFree(RecentCounter* obj);
+int recentCounterPing(RecentCounter* obj, int t);
+void recentCounterFree(RecentCounter* obj);
 #endif
