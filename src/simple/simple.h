@@ -49,5 +49,15 @@ RecentCounter* recentCounterCreate();
 int recentCounterPing(RecentCounter* obj, int t);
 void recentCounterFree(RecentCounter* obj);
 
-int recentCounterPing(RecentCounter* obj, int t);
+int rangeSumBST(struct TreeNode* root, int low, int high);
+bool validMountainArray(int* arr, int arrSize);
+int* diStringMatch(char* s, int* returnSize);
+int minDeletionSize(char** strs, int strsSize);
+bool isAlienSorted(char** words, int wordsSize, char* order);
+int repeatedNTimes(int* nums, int numsSize);
+bool isUnivalTree(struct TreeNode* root);
+int largestPerimeter(int* nums, int numsSize);
+int* sortedSquares(int* nums, int numsSize, int* returnSize);
+int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
+
 #endif
