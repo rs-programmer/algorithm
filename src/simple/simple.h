@@ -60,12 +60,4 @@ int largestPerimeter(int* nums, int numsSize);
 int* sortedSquares(int* nums, int numsSize, int* returnSize);
 int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
 
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-
 #endif
