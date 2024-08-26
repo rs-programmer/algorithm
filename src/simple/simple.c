@@ -1049,3 +1049,213 @@ void recentCounterFree(RecentCounter* obj)
     free(obj);
 }
 
+
+void rangeNodeBST(struct TreeNode* root, int low, int high, int *sum)
+{
+    if (root == NULL) {
+        return;
+    }
+
+    /* 中序遍历 */
+    rangeNodeBST(root->left, low, high, sum);
+    if (root->val >= low && root->val <= high) {
+        *sum += root->val;
+    }
+
+    rangeNodeBST(root->right, low, high, sum);
+}
+
+int rangeSumBST(struct TreeNode* root, int low, int high)
+{
+    /* 创建数组 */
+    int sum = 0;
+    rangeNodeBST(root, low, high, &sum);
+    return sum;
+}
+
+bool validMountainArray(int* arr, int arrSize)
+{
+    if (arrSize < 3) {
+        return false;
+    }
+
+    /* 获取左边上升时，最高的下表值 */
+    int left = 0;
+    while ((left < arrSize - 1) && (arr[left + 1] > arr[left])) {
+        left++;
+    }
+
+    int right = arrSize - 1;
+    while ((right > 0) && (arr[right - 1] > arr[right])) {
+        right--;
+    }
+
+    if (left == 0 || right == arrSize - 1) {
+        return false;
+    }
+
+    return left == right;
+}
+
+int* diStringMatch(char* s, int* returnSize)
+{
+    /* 出现 I 则获取较小值，出现 D 则获取较大值 */
+    int s_len = strlen(s);
+    int *ans = (int*)malloc(sizeof(int) * (s_len + 1));
+    *returnSize = s_len + 1;
+
+    /* [0, s_len] */
+    int left = 0, right = s_len;
+
+    for (int i = 0; i < s_len; i++) {
+        if (s[i] == 'I') {
+            ans[i] = left;
+            left++;
+        } else {
+            ans[i] = right;
+            right--;
+        }
+    }
+
+    /* 最后一位数据 */
+    ans[s_len] = left;
+    return ans;
+}
+
+int minDeletionSize(char** strs, int strsSize)
+{
+    int row = strsSize;
+    if (row <= 1) {
+        return 0;
+    }
+
+    int col = strlen(strs[0]);
+    int sum = 0;
+
+    for (int c = 0; c < col; c++) {
+        for (int r = 0; r < row - 1; r++) {
+            if (strs[r][c] > strs[r + 1][c]) {
+                sum++;
+                break;
+            }
+        }
+    }
+
+    return sum;
+}
+
+bool isAlienSorted(char** words, int wordsSize, char* order)
+{
+    /* 构建 order 哈希表 */
+    int hash_order[30];
+    int order_len = strlen(order);
+    for (int i = 0; i < order_len; i++) {
+        hash_order[order[i] - 'a'] = i;
+    }
+
+    /* 循环 */
+    for (int i = 0; i < wordsSize - 1; i++) {
+        char *cur = words[i];
+        char *next = words[i + 1];
+
+        int cur_len = strlen(cur);
+        int next_len = strlen(next);
+
+        /* 寻找不同字符出现的位置 */
+        int k = 0;
+        int len = cur_len < next_len? cur_len : next_len;
+        for (k = 0; k < len; k++) {
+            if (cur[k] != next[k]) {
+                break;
+            }
+        }
+
+        /* 根据 k 值做边界判断 */
+        if (k == cur_len && k == next_len) {
+
+        } else if (k == cur_len) {
+            
+        } else if (k == next_len) {
+            return false;
+        } else if (hash_order[cur[k] - 'a'] > hash_order[next[k] - 'a']) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int repeatedNTimes(int* nums, int numsSize)
+{
+    /* 快排 从小到大 */
+    fast_sort(nums, 0, numsSize - 1);
+
+    /* 查找 */
+    for (int i = 0; i < numsSize - 1; i++) {
+        if (nums[i] == nums[i + 1]) {
+            return nums[i];
+        }
+    }
+
+    return -1;
+}
+
+bool isUnivalTree(struct TreeNode* root)
+{
+    if (root == NULL) {
+        return true;
+    }
+
+    /* 左节点 */
+    if (root->left != NULL && root->val != root->left->val) {
+        return false;
+    }
+
+    /* 右节点 */
+    if (root->right != NULL && root->val != root->right->val) {
+        return false;
+    }
+
+    /* 三个节点元素相同 */
+    return isUnivalTree(root->left) && isUnivalTree(root->right);
+}
+
+int largestPerimeter(int* nums, int numsSize)
+{
+    /* 快排 从小到大 */
+    fast_sort(nums, 0, numsSize - 1);
+
+    /* 查找 */
+    int sum = 0;
+    for (int i = numsSize - 1; i > 1; i--) {
+        for (int j = i - 1; j > 0; j--) {
+            /* 判断是否可组成三角形 */
+            int k = j - 1;
+            if ((nums[k] + nums[j] > nums[i]) && (nums[i] - nums[j] < nums[k])) {
+                sum = nums[i] + nums[j] + nums[k];
+                break;
+            }
+        }
+
+        if (sum != 0) {
+                break;
+        }
+    }
+
+    return sum;
+}
+
+int* sortedSquares(int* nums, int numsSize, int* returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * numsSize);
+    *returnSize = numsSize;
+
+    /* 平方 */
+    for (int i = 0; i < numsSize; i++) {
+        ans[i] = nums[i] * nums[i];
+    }
+
+    fast_sort(ans, 0, numsSize - 1);
+    return ans;
+}
+
