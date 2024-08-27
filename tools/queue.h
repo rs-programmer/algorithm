@@ -18,8 +18,8 @@ loop_queue_int_t* create_loop_queue_int(int capacity);
 void free_loop_queue_int(loop_queue_int_t *queue);
 bool push_loop_queue_int(loop_queue_int_t *queue, int val);
 bool pop_loop_queue_int(loop_queue_int_t *queue, int *val);
-bool isEmpty_loop_queue_int(loop_queue_int_t *queue);
-bool isFull_loop_queue_int(loop_queue_int_t *queue);
+bool is_empty_loop_queue_int(loop_queue_int_t *queue);
+bool is_full_loop_queue_int(loop_queue_int_t *queue);
 int get_rear_loop_queue_int(loop_queue_int_t *queue);
 int get_front_loop_queue_int(loop_queue_int_t *queue);
 

@@ -3,13 +3,13 @@
 
 #include "sort.h"
 
-#define Transf(T, n) ((T*)((char*)n - (char*)&(((T*)0)->n)))
-
 int main()
 {
-    char *str = "IDID";
+    int nums[] = {0};
+    int k = 1000;
     int size = 0;
-    diStringMatch(str, &size);
+    
+    addToArrayForm(nums, 1, k, &size);
     return 0;
 }
 

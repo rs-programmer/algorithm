@@ -1027,7 +1027,7 @@ RecentCounter* recentCounterCreate()
 int recentCounterPing(RecentCounter* obj, int t)
 {
     /* 先去掉不满足条件的数据 */
-    while (!isEmpty_loop_queue_int(obj->queue)) {
+    while (!is_empty_loop_queue_int(obj->queue)) {
         int front = get_front_loop_queue_int(obj->queue);
         if (front < t - 3000) {
             /* 出队列 */
@@ -1258,4 +1258,17 @@ int* sortedSquares(int* nums, int numsSize, int* returnSize)
     fast_sort(ans, 0, numsSize - 1);
     return ans;
 }
+
+int* addToArrayForm(int* num, int numSize, int k, int* returnSize)
+{
+    /* 将 k 入栈 */
+    stack_t *stack = create_stack(100);
+    while (k != 0) {
+        push_stack(stack, k % 10);
+        k /= 10;
+    }
+}
+
+
+
 

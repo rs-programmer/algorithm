@@ -3,12 +3,13 @@
 
 #include "type.h"
 
-typedef char ElemType;
+typedef int ElemType;
 
 typedef struct stack {
     ElemType *arr;
     int top;
     int capacity;
+    int size;
 } stack_t;
 
 stack_t* create_stack(int capacity);
