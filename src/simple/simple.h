@@ -65,5 +65,10 @@ bool isAlienSorted(char** words, int wordsSize, char* order);
 bool isAlienSorted(char** words, int wordsSize, char* order);
 bool isAlienSorted(char** words, int wordsSize, char* order);
 bool isAlienSorted(char** words, int wordsSize, char* order);
+int repeatedNTimes(int* nums, int numsSize);
+int repeatedNTimes(int* nums, int numsSize);
+int repeatedNTimes(int* nums, int numsSize);
+int repeatedNTimes(int* nums, int numsSize);
+int repeatedNTimes(int* nums, int numsSize);
 
 #endif
