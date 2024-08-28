@@ -1339,5 +1339,6 @@ int findJudge(int n, int** trust, int trustSize, int* trustColSize)
 {
     int a = 100;
     int c = 200;
+    int d = 500;
     return true;
 }
