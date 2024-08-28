@@ -1267,8 +1267,75 @@ int* addToArrayForm(int* num, int numSize, int k, int* returnSize)
         push_stack(stack, k % 10);
         k /= 10;
     }
+
+    return NULL;
 }
 
+typedef struct
+{
+    int x;
+    int y;
+    int x_flower;
+    int y_flower;
+    int x_find;
+    int y_find;
+    struct TreeNode *x_parent;
+    struct TreeNode *y_parent;
+} sdf_t;
 
+void searchSDF(struct TreeNode* root, sdf_t *sdf, int flower, struct TreeNode* parent)
+{
+    if (root == NULL) {
+        return;
+    }
 
+    /* 先序遍历 */
+    if (!sdf->x_find && root->val == sdf->x) {
+        sdf->x_flower = flower;
+        sdf->x_parent = parent;
+        sdf->x_find = true; /* 标识 x 节点已找到 */
+    }
 
+    if (!sdf->y_find && root->val == sdf->y) {
+        sdf->y_flower = flower;
+        sdf->y_parent = parent;
+        sdf->y_find = true; /* 标识 y 节点已找到 */
+    }
+
+    if (sdf->x_find && sdf->y_find) {
+        return;
+    }
+    searchSDF(root->left, sdf, flower + 1, root);
+
+    if (sdf->x_find && sdf->y_find) {
+        return;
+    }
+    searchSDF(root->right, sdf, flower + 1, root);
+}
+
+bool isCousins(struct TreeNode* root, int x, int y)
+{
+    sdf_t sdf = {
+        .x = x,
+        .y = y,
+        .x_flower = 0,
+        .y_flower = 0,
+        .x_find = false,
+        .y_find = false,
+        .x_parent = NULL,
+        .y_parent = NULL
+    };
+
+    searchSDF(root, &sdf, 0, NULL);
+    
+    if ((sdf.x_flower == sdf.y_flower) && (sdf.x_parent != sdf.y_parent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int findJudge(int n, int** trust, int trustSize, int* trustColSize)
+{
+    
+}

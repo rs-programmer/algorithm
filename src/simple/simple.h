@@ -60,5 +60,7 @@ bool isUnivalTree(struct TreeNode* root);
 int largestPerimeter(int* nums, int numsSize);
 int* sortedSquares(int* nums, int numsSize, int* returnSize);
 int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
+bool isCousins(struct TreeNode* root, int x, int y);
+int findJudge(int n, int** trust, int trustSize, int* trustColSize);
 
 #endif
