@@ -1337,5 +1337,10 @@ bool isCousins(struct TreeNode* root, int x, int y)
 
 int findJudge(int n, int** trust, int trustSize, int* trustColSize)
 {
-    
+    return true;
+    return true;
+    return true;
+    return true;
+    return true;
+    return true;
 }
