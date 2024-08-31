@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <math.h>
 
 #include "tools.h"
 #include "hash.h"
@@ -59,16 +60,9 @@ bool isUnivalTree(struct TreeNode* root);
 int largestPerimeter(int* nums, int numsSize);
 int* sortedSquares(int* nums, int numsSize, int* returnSize);
 int* addToArrayForm(int* num, int numSize, int k, int* returnSize);
-bool isAlienSorted(char** words, int wordsSize, char* order);
-bool isAlienSorted(char** words, int wordsSize, char* order);
-bool isAlienSorted(char** words, int wordsSize, char* order);
-bool isAlienSorted(char** words, int wordsSize, char* order);
-bool isAlienSorted(char** words, int wordsSize, char* order);
-bool isAlienSorted(char** words, int wordsSize, char* order);
-int repeatedNTimes(int* nums, int numsSize);
-int repeatedNTimes(int* nums, int numsSize);
-int repeatedNTimes(int* nums, int numsSize);
-int repeatedNTimes(int* nums, int numsSize);
-int repeatedNTimes(int* nums, int numsSize);
+bool isCousins(struct TreeNode* root, int x, int y);
+int findJudge(int n, int** trust, int trustSize, int* trustColSize);
+int numRookCaptures(char** board, int boardSize, int* boardColSize);
+char ** commonChars(char ** words, int wordsSize, int* returnSize);
 
 #endif

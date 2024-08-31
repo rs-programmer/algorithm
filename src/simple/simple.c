@@ -1027,7 +1027,7 @@ RecentCounter* recentCounterCreate()
 int recentCounterPing(RecentCounter* obj, int t)
 {
     /* 先去掉不满足条件的数据 */
-    while (!isEmpty_loop_queue_int(obj->queue)) {
+    while (!is_empty_loop_queue_int(obj->queue)) {
         int front = get_front_loop_queue_int(obj->queue);
         if (front < t - 3000) {
             /* 出队列 */
@@ -1258,4 +1258,216 @@ int* sortedSquares(int* nums, int numsSize, int* returnSize)
     fast_sort(ans, 0, numsSize - 1);
     return ans;
 }
+
+int* addToArrayForm(int* num, int numSize, int k, int* returnSize)
+{
+    /* 将 k 入栈 */
+    stack_t *stack = create_stack(100);
+    while (k != 0) {
+        push_stack(stack, k % 10);
+        k /= 10;
+    }
+
+    return NULL;
+}
+
+typedef struct
+{
+    int x;
+    int y;
+    int x_flower;
+    int y_flower;
+    int x_find;
+    int y_find;
+    struct TreeNode *x_parent;
+    struct TreeNode *y_parent;
+} sdf_t;
+
+void searchSDF(struct TreeNode* root, sdf_t *sdf, int flower, struct TreeNode* parent)
+{
+    if (root == NULL) {
+        return;
+    }
+
+    /* 先序遍历 */
+    if (!sdf->x_find && root->val == sdf->x) {
+        sdf->x_flower = flower;
+        sdf->x_parent = parent;
+        sdf->x_find = true; /* 标识 x 节点已找到 */
+    }
+
+    if (!sdf->y_find && root->val == sdf->y) {
+        sdf->y_flower = flower;
+        sdf->y_parent = parent;
+        sdf->y_find = true; /* 标识 y 节点已找到 */
+    }
+
+    if (sdf->x_find && sdf->y_find) {
+        return;
+    }
+    searchSDF(root->left, sdf, flower + 1, root);
+
+    if (sdf->x_find && sdf->y_find) {
+        return;
+    }
+    searchSDF(root->right, sdf, flower + 1, root);
+}
+
+bool isCousins(struct TreeNode* root, int x, int y)
+{
+    sdf_t sdf = {
+        .x = x,
+        .y = y,
+        .x_flower = 0,
+        .y_flower = 0,
+        .x_find = false,
+        .y_find = false,
+        .x_parent = NULL,
+        .y_parent = NULL
+    };
+
+    searchSDF(root, &sdf, 0, NULL);
+    
+    if ((sdf.x_flower == sdf.y_flower) && (sdf.x_parent != sdf.y_parent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+int findJudge(int n, int** trust, int trustSize, int* trustColSize)
+{
+        if (n <= 0) {
+        return -1;
+    } else if (n == 1) {
+        return 1;
+    }
+    /* 统计节点的入度与出度 */
+    int* ans = (int*)malloc(sizeof(int) * (n + 1));
+    for (int i = 0; i < n + 1; i++) {
+        ans[i] = 0;
+    }
+
+    for (int i = 0; i < trustSize; i++) {
+        /* 出度 -1； 入度 +1 */
+        ans[trust[i][0]]--;
+        ans[trust[i][1]]++;
+    }
+
+    int id = -1;
+    for (int i = 0; i < n + 1; i++) {
+        if (ans[i] == n - 1) {
+            id = i;
+            break;
+        }
+    }
+
+    return id;
+}
+
+int numRookCaptures(char** board, int boardSize, int* boardColSize)
+{
+    int di[] = {-1, 1, 0, 0};
+    int dj[] = {0, 0, -1, 1};
+    int d_len = sizeof(di) / sizeof(di[0]);
+
+    /* 寻找 R 所在的下标 */
+    int i, j;
+    for (i = 0; i < boardSize; i++) {
+        for (j = 0; j < boardColSize[i]; j++) {
+            if (board[i][j] == 'R') {
+                /* 找到 R */
+                break;
+            }
+        }
+
+        if (j < boardColSize[i]) {
+            break;
+        }
+    }
+
+    /* 查找 (i, j) 的四个方向 */
+    int ans = 0;
+    for (int k = 0; k < d_len; k++) {
+        int dx = i;
+        int dy = j;
+        while (true) {
+            dx += di[k];
+            dy += dj[k];
+            if (dx < 0 || dx >= boardColSize[i] ||
+                dy < 0 || dy >= boardSize ||
+                board[dx][dy] == 'B') {
+                    /* 空格跳过，象不可吃 */
+                    break;
+            }
+
+            if (board[dx][dy] == 'p') {
+                /* 只可吃一个卒 */
+                ans += 1;
+                break;
+            }
+        }
+    }
+
+    return ans;
+}
+
+char **commonChars(char ** words, int wordsSize, int* returnSize)
+{
+    /* 二位数组 记录每个字符出现的频率 */
+    int **ans = (int**)malloc(sizeof(int*) * wordsSize);
+    int max_len = 0;
+    for (int i = 0; i < wordsSize; i++) {
+        int words_len = strlen(words[i]);
+        if (words_len > max_len) {
+            max_len = words_len;
+        }
+        int *tmp = (int*)calloc(26, sizeof(int));
+        for (int j = 0; j < words_len; j++) {
+            tmp[words[i][j] - 'a'] += 1;
+        }
+        ans[i] = tmp;
+    }
+
+    /* 查询每一列 */
+    char **chs = (char**)malloc(sizeof(char*) * max_len);
+    int chs_len = 0;
+    int min;
+    int row;
+    for (int col = 0; col < 26; col++) {
+        min = ans[0][col];
+        for (row = 0; row < wordsSize; row++) {
+            if (ans[row][col] == 0) {
+                /* 直接跳出 */
+                break;
+            }
+
+            if (ans[row][col] < min) {
+                min = ans[row][col];
+            }
+        }
+
+        if (row < wordsSize) {
+            continue;
+        }
+
+        /* 满足最小 min 次数 */
+        for (int k = 0; k < min; k++) {
+            char *p = (char*)malloc(sizeof(char) * 2);
+            p[0] = 'a' + col;
+            p[1] = '\0';
+            chs[chs_len++] = p;
+        }
+    }
+
+    /* 数据销毁 */
+    for (int i = 0; i < wordsSize; i++) {
+        free(ans[i]);
+    }
+    free(ans);
+
+    *returnSize = chs_len;
+    return chs;    
+}
+
 

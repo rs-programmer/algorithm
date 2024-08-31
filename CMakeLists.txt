@@ -22,6 +22,5 @@ set(CMAKE_BUILD_TYPE Debug)
 add_subdirectory(src)
 # tools
 add_subdirectory(tools)
-
 # test
 add_subdirectory(test)

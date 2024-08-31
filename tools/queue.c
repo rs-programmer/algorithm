@@ -24,7 +24,7 @@ void free_loop_queue_int(loop_queue_int_t *queue)
 
 bool push_loop_queue_int(loop_queue_int_t *queue, int val)
 {
-    if (isFull_loop_queue_int(queue)) {
+    if (is_full_loop_queue_int(queue)) {
         return false;
     }
 
@@ -36,7 +36,7 @@ bool push_loop_queue_int(loop_queue_int_t *queue, int val)
 
 bool pop_loop_queue_int(loop_queue_int_t *queue, int *val)
 {
-    if (isEmpty_loop_queue_int(queue)) {
+    if (is_empty_loop_queue_int(queue)) {
         return false;
     }
 
@@ -49,13 +49,13 @@ bool pop_loop_queue_int(loop_queue_int_t *queue, int *val)
     return true;
 }
 
-bool isEmpty_loop_queue_int(loop_queue_int_t *queue)
+bool is_empty_loop_queue_int(loop_queue_int_t *queue)
 {
     // return queue->front == queue->rear;
     return queue->size == 0;
 }
 
-bool isFull_loop_queue_int(loop_queue_int_t *queue)
+bool is_full_loop_queue_int(loop_queue_int_t *queue)
 {
     // return (queue->rear + 1) % queue->capacity == queue->front;
     return queue->size == queue->capacity - 1;
