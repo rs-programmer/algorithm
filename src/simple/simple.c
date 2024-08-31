@@ -1412,8 +1412,62 @@ int numRookCaptures(char** board, int boardSize, int* boardColSize)
     return ans;
 }
 
-char ** commonChars(char ** words, int wordsSize, int* returnSize)
+char **commonChars(char ** words, int wordsSize, int* returnSize)
 {
+    /* 二位数组 记录每个字符出现的频率 */
+    int **ans = (int**)malloc(sizeof(int*) * wordsSize);
+    int max_len = 0;
+    for (int i = 0; i < wordsSize; i++) {
+        int words_len = strlen(words[i]);
+        if (words_len > max_len) {
+            max_len = words_len;
+        }
+        int *tmp = (int*)calloc(26, sizeof(int));
+        for (int j = 0; j < words_len; j++) {
+            tmp[words[i][j] - 'a'] += 1;
+        }
+        ans[i] = tmp;
+    }
 
-    
+    /* 查询每一列 */
+    char **chs = (char**)malloc(sizeof(char*) * max_len);
+    int chs_len = 0;
+    int min;
+    int row;
+    for (int col = 0; col < 26; col++) {
+        min = ans[0][col];
+        for (row = 0; row < wordsSize; row++) {
+            if (ans[row][col] == 0) {
+                /* 直接跳出 */
+                break;
+            }
+
+            if (ans[row][col] < min) {
+                min = ans[row][col];
+            }
+        }
+
+        if (row < wordsSize) {
+            continue;
+        }
+
+        /* 满足最小 min 次数 */
+        for (int k = 0; k < min; k++) {
+            char *p = (char*)malloc(sizeof(char) * 2);
+            p[0] = 'a' + col;
+            p[1] = '\0';
+            chs[chs_len++] = p;
+        }
+    }
+
+    /* 数据销毁 */
+    for (int i = 0; i < wordsSize; i++) {
+        free(ans[i]);
+    }
+    free(ans);
+
+    *returnSize = chs_len;
+    return chs;    
 }
+
+
