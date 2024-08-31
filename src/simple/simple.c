@@ -1337,8 +1337,83 @@ bool isCousins(struct TreeNode* root, int x, int y)
 
 int findJudge(int n, int** trust, int trustSize, int* trustColSize)
 {
-    int a = 100;
-    int c = 200;
-    int d = 500;
-    return true;
+        if (n <= 0) {
+        return -1;
+    } else if (n == 1) {
+        return 1;
+    }
+    /* 统计节点的入度与出度 */
+    int* ans = (int*)malloc(sizeof(int) * (n + 1));
+    for (int i = 0; i < n + 1; i++) {
+        ans[i] = 0;
+    }
+
+    for (int i = 0; i < trustSize; i++) {
+        /* 出度 -1； 入度 +1 */
+        ans[trust[i][0]]--;
+        ans[trust[i][1]]++;
+    }
+
+    int id = -1;
+    for (int i = 0; i < n + 1; i++) {
+        if (ans[i] == n - 1) {
+            id = i;
+            break;
+        }
+    }
+
+    return id;
+}
+
+int numRookCaptures(char** board, int boardSize, int* boardColSize)
+{
+    int di[] = {-1, 1, 0, 0};
+    int dj[] = {0, 0, -1, 1};
+    int d_len = sizeof(di) / sizeof(di[0]);
+
+    /* 寻找 R 所在的下标 */
+    int i, j;
+    for (i = 0; i < boardSize; i++) {
+        for (j = 0; j < boardColSize[i]; j++) {
+            if (board[i][j] == 'R') {
+                /* 找到 R */
+                break;
+            }
+        }
+
+        if (j < boardColSize[i]) {
+            break;
+        }
+    }
+
+    /* 查找 (i, j) 的四个方向 */
+    int ans = 0;
+    for (int k = 0; k < d_len; k++) {
+        int dx = i;
+        int dy = j;
+        while (true) {
+            dx += di[k];
+            dy += dj[k];
+            if (dx < 0 || dx >= boardColSize[i] ||
+                dy < 0 || dy >= boardSize ||
+                board[dx][dy] == 'B') {
+                    /* 空格跳过，象不可吃 */
+                    break;
+            }
+
+            if (board[dx][dy] == 'p') {
+                /* 只可吃一个卒 */
+                ans += 1;
+                break;
+            }
+        }
+    }
+
+    return ans;
+}
+
+char ** commonChars(char ** words, int wordsSize, int* returnSize)
+{
+
+    
 }
