@@ -6,6 +6,7 @@ stack_t* create_stack(int capacity)
     stack->arr = (ElemType*)malloc(sizeof(ElemType) * capacity);
     stack->top = -1;
     stack->capacity = capacity;
+    stack->size = 0;
 
     return stack;
 }
@@ -34,6 +35,7 @@ bool push_stack(stack_t *stack, ElemType elem)
 
     stack->top += 1;
     stack->arr[stack->top] = elem;
+    stack->size += 1;
     return true;
 }
 
@@ -44,6 +46,7 @@ bool pop_stack(stack_t *stack)
     }
 
     stack->top -= 1;
+    stack->size -= 1;
     return true;
 }
 
