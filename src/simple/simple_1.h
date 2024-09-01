@@ -18,5 +18,9 @@
 #include "type.h"
 int largestSumAfterKNegations(int* nums, int numsSize, int k);
 int bitwiseComplement(int n);
-
+int largestSumAfterKNegations(int* nums, int numsSize, int k);
+int largestSumAfterKNegations(int* nums, int numsSize, int k);
+int largestSumAfterKNegations(int* nums, int numsSize, int k);
+int largestSumAfterKNegations(int* nums, int numsSize, int k);
+int largestSumAfterKNegations(int* nums, int numsSize, int k);
 #endif
