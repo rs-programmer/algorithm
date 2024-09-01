@@ -69,3 +69,76 @@ int bitwiseComplement(int n)
     free_link(link);
     return ans;
 }
+
+bool canThreePartsEqualSum(int* arr, int arrSize)
+{
+    /* 计算和 */
+    int sum = 0;
+    for (int i = 0; i < arrSize; i++) {
+        sum += arr[i];
+    }
+
+    if (sum % 3 != 0) {
+        return false;
+    }
+
+    sum /= 3;
+    /* 寻找 i */
+    int i = 0;
+    int sum_i = 0;
+    for (i = 0; i < arrSize; i++) {
+        sum_i += arr[i];
+        if (sum_i == sum) {
+            break;
+        }
+    }
+
+    if (i >= arrSize - 2) {
+        return false;
+    }
+
+    /* 寻找 j */
+    int j = 0;
+    int sum_j = 0;
+    for (j = i + 1; j < arrSize; j++) {
+        sum_j += arr[j];
+        if (sum_j == sum) {
+            break;
+        }
+    }
+
+    if (j >= arrSize - 1) {
+        return false;
+    }
+
+    /* 最后一段和 = sum */
+    return true;
+}
+
+bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize)
+{
+    bool *ans = (bool*)malloc(sizeof(bool) * numsSize);
+    int ans_len = 0;
+
+    /* 循环计算 */
+    int sum = 0;
+    for (int i = 0; i < numsSize; i++) {
+        sum = sum * 2 + nums[i];
+        sum %= 10;
+        if (sum % 5 == 0) {
+            ans[ans_len] = true;
+        } else {
+            ans[ans_len] = false;
+        }
+
+        ans_len++;
+    }
+
+    *returnSize = ans_len;
+    return ans;
+}
+
+int* nextLargerNodes(struct ListNode* head, int* returnSize)
+{
+    
+}
