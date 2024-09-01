@@ -6,13 +6,6 @@
         "map.h": "c",
         "random": "c",
         "sort.h": "c",
-        "math.h": "c",
-        "array": "c",
-        "string_view": "c",
-        "initializer_list": "c",
-        "span": "c",
-        "utility": "c",
-        "simple_1.h": "c",
-        "link.h": "c"
+        "math.h": "c"
     }
 }
