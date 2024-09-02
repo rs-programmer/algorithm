@@ -12,8 +12,10 @@ set(BINPATH "${PROJECT_SOURCE_DIR}/bin")
 set(STATIC ON)
 set(SHARED OFF)
 
-# cmake 代码编译版本
+# cmake 代码编译版本 添加GDB调试功能
 set(CMAKE_BUILD_TYPE Debug)
+# set(CMAKE_CXX_FLAGS_DEBUG "$ENV{CXXFLAGS} -O0 -Wall -g -ggdb")
+# set(CMAKE_CXX_FLAGS_RELEASE "$ENV{CXXFLAGS} -O3 -Wall")
 
 # 配置文件
 # add_definitions(-DDEBUG)

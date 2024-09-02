@@ -138,7 +138,71 @@ bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize)
     return ans;
 }
 
-int* nextLargerNodes(struct ListNode* head, int* returnSize)
+char* removeOuterParentheses(char* s)
 {
-    
+    int num = 0;
+    int cur = 0;
+    int s_len = strlen(s);
+    char *ans = (char*)malloc(sizeof(char) * s_len);
+    int ans_len = 0;
+
+    for (int i = 0; i < s_len; i++) {
+        if (s[i] == '(') {
+            num++;
+        } else if (s[i] == ')') {
+            num--;
+        }
+
+        if (num == 0) {
+            /* 当前是一个原语 */
+            cur++;
+            int next = i;
+            next--;
+            if (next > cur) {
+                /* 还存在数据 */
+                memcpy(ans + ans_len, s + cur, next - cur + 1);
+                ans_len += next - cur + 1;
+            }
+            cur = i + 1;
+        }
+    }
+
+    ans[ans_len] = '\0';
+    return ans;
+}
+
+void sumNode(struct TreeNode* root, int sum, int *total)
+{
+    sum <<= 1;
+    sum |= root->val;
+    if (root->left == root->right && root->left == NULL) {
+        /* 叶子节点 */
+        *total += sum;
+        return;
+    }
+
+    if (root->left != NULL) {
+        sumNode(root->left, sum, total);
+    }
+
+    if (root->right != NULL) {
+        sumNode(root->right, sum, total);
+    }
+}
+
+int sumRootToLeaf(struct TreeNode* root)
+{
+    int total = 0;
+    if (root == NULL) {
+        return 0;
+    }
+
+    sumNode(root, 0, &total);
+    return total;
+}
+
+bool divisorGame(int n)
+{
+    /* 偶数赢 奇数输 */
+    return !(n&1);
 }

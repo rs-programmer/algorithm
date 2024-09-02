@@ -16,11 +16,13 @@
 #include "link.h"
 
 #include "type.h"
+
 int largestSumAfterKNegations(int* nums, int numsSize, int k);
 int bitwiseComplement(int n);
 bool canThreePartsEqualSum(int* arr, int arrSize);
 bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize);
-int* nextLargerNodes(struct ListNode* head, int* returnSize);
-
+char* removeOuterParentheses(char* s);
+int sumRootToLeaf(struct TreeNode* root);
+bool divisorGame(int n);
 
 #endif
