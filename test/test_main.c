@@ -3,7 +3,8 @@
 
 int main()
 {
-    char *s = "(()())(())";
+    char *s = "(()())(())()()())()()()()())";
+    int sum = 100;
     removeOuterParentheses(s);
     return 0;
 }
