@@ -24,5 +24,9 @@ bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize);
 char* removeOuterParentheses(char* s);
 int sumRootToLeaf(struct TreeNode* root);
 bool divisorGame(int n);
+int** allCellsDistOrder(int rows, int cols, int rCenter, int cCenter, int* returnSize, int** returnColumnSizes);
+int lastStoneWeight(int* stones, int stonesSize);
+char* removeDuplicates(char* s);
+int heightChecker(int* heights, int heightsSize);
 
 #endif

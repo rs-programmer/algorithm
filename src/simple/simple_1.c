@@ -206,3 +206,132 @@ bool divisorGame(int n)
     /* 偶数赢 奇数输 */
     return !(n&1);
 }
+
+/* 自定义一个结构体 */
+typedef struct cell
+{
+    int x;
+    int y;
+    int r; /* 距离 */
+} cell_t;
+
+int compar(cell_t *c1, cell_t *c2)
+{
+    return c1->r > c2->r;
+}
+
+int** allCellsDistOrder(int rows, int cols, int rCenter, int cCenter, int* returnSize, int** returnColumnSizes)
+{
+    int sum = rows * cols;
+    *returnSize = sum;
+    *returnColumnSizes = (int*)malloc(sizeof(int) * sum);
+    for (int i = 0; i < sum; i++) {
+        (*returnColumnSizes)[i] = 2;
+    }
+
+    /* 计算每一个元素到 rc rr 的距离 */
+    cell_t *ces = (cell_t*)malloc(sizeof(cell_t) * sum);
+    int ces_len = 0;
+    for (int i = 0; i < rows; i++) {
+        for (int j = 0; j < cols; j++) {
+            ces[ces_len].x = i;
+            ces[ces_len].y = j;
+            ces[ces_len].r = abs(i - rCenter) + abs(j - cCenter);
+            ces_len++;
+        }
+    }
+
+    /* 自定义排序规则 */
+    qsort(ces, ces_len, sizeof(cell_t), compar);
+
+    /* 数据拷贝 */
+    int **ans = (int**)malloc(sizeof(int*) * sum);
+    int ans_len = 0;
+    for (int i = 0; i < ces_len; i++) {
+        int *arr = (int*)malloc(sizeof(int) * 2);
+        arr[0] = ces[i].x;
+        arr[1] = ces[i].y;
+        ans[ans_len++] = arr;
+    }
+
+    /* 数据销毁 */
+    free(ces);
+
+    return ans;
+}
+
+int lastStoneWeight(int* stones, int stonesSize)
+{
+    /* max1 < max2 */
+    int max1, max2;
+    int max1_id, max2_id;
+    while (1) {
+        max1 = -2, max2 = -1;
+        max1_id = -2, max2_id = -1;
+        for (int i = 0; i < stonesSize; i++) {
+            if (stones[i] > max2) {
+                max1 = max2;
+                max1_id = max2_id;
+                max2 = stones[i];
+                max2_id = i;
+            } else if (stones[i] > max1) {
+                max1 = stones[i];
+                max1_id = i;
+            }
+        }
+
+        if (max2 == -1) {
+            /* 全部是否都碎掉了 */
+            return 0;
+        } else if (max1 == -1) {
+            /* 还剩下一块石头 */
+            return max2;
+        } else {
+            /* 存在最大的两个石头 */
+            int x = max2 - max1;
+            stones[max1_id] = -1;
+            if (x > 0) {
+                stones[max2_id] = x;
+            } else {
+                stones[max2_id] = -1;
+            }
+        }
+    }
+}
+
+char* removeDuplicates(char* s)
+{
+    int s_len = strlen(s);
+    char *ans = (char*)malloc(sizeof(char) * (s_len + 1));
+    int ans_len = 0;
+    for (int i = 0; i < s_len; i++) {
+        ans[ans_len] = s[i];
+        /* 判断是否重复 */
+        if (ans_len > 0 && ans[ans_len - 1] == ans[ans_len]) {
+            ans_len--;
+        } else {
+            ans_len++;
+        }
+    }
+
+    ans[ans_len] = '\0';
+    return ans;
+}
+
+int heightChecker(int* heights, int heightsSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * heightsSize);
+    memcpy(ans, heights, sizeof(int) * heightsSize);
+    /* 快排 */
+    fast_sort(heights, 0, heightsSize - 1);
+    int n = 0;
+    for (int i = 0; i < heightsSize; i++) {
+        if (ans[i] != heights[i]) {
+            n++;
+        }
+    }
+
+    free(ans);
+    return n;
+}
+
