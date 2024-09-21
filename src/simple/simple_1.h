@@ -28,5 +28,7 @@ int** allCellsDistOrder(int rows, int cols, int rCenter, int cCenter, int* retur
 int lastStoneWeight(int* stones, int stonesSize);
 char* removeDuplicates(char* s);
 int heightChecker(int* heights, int heightsSize);
+char* gcdOfStrings(char* str1, char* str2);
+char** findOcurrences(char* text, char* first, char* second, int* returnSize);
 
 #endif
