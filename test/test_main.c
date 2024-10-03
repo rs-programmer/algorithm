@@ -3,8 +3,7 @@
 
 int main()
 {
-    int size = 0;
-    findOcurrences("alice is a good girl she is a good student",
-                   "a", "good", &size);
+    int arr[] = {1, 2, 3, 4};
+    distanceBetweenBusStops(arr, 4, 0, 1);
     return 0;
 }

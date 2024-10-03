@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <math.h>
+#include <pthread.h>
 
 #include "tools.h"
 #include "hash.h"
@@ -30,5 +31,18 @@ char* removeDuplicates(char* s);
 int heightChecker(int* heights, int heightsSize);
 char* gcdOfStrings(char* str1, char* str2);
 char** findOcurrences(char* text, char* first, char* second, int* returnSize);
+void duplicateZeros(int* arr, int arrSize);
+int* distributeCandies(int candies, int num_people, int* returnSize);
+char * defangIPaddr(char * address);
+int* relativeSortArray(int* arr1, int arr1Size, int* arr2, int arr2Size, int* returnSize);
+int numEquivDominoPairs(int** dominoes, int dominoesSize, int* dominoesColSize);
+int tribonacci(int n);
+int dayOfYear(char* date);
+int countCharacters(char** words, int wordsSize, char* chars);
+int numPrimeArrangements(int n);
+int distanceBetweenBusStops(int* distance, int distanceSize, int start, int destination);
+
+
+
 
 #endif

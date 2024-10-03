@@ -7,6 +7,8 @@
         "random": "c",
         "sort.h": "c",
         "math.h": "c",
-        "simple_1.h": "c"
+        "simple_1.h": "c",
+        "pthread.h": "c",
+        "chrono": "c"
     }
 }

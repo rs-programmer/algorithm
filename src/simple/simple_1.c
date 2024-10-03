@@ -513,3 +513,236 @@ char **findOcurrences(char *text, char *first, char *second, int *returnSize)
 
     return ans;
 }
+
+void duplicateZeros(int* arr, int arrSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * arrSize);
+    int ans_len = 0;
+    for (int i = 0; ans_len < arrSize; i++, ans_len++) {
+        ans[ans_len] = arr[i];
+        if (ans[ans_len] == 0 && ans_len < arrSize - 1) {
+            ans_len++;
+            ans[ans_len] = 0;
+        }
+    }
+
+    /* 复制 */
+    for (int i = 0; i < arrSize; i++) {
+        arr[i] = ans[i];
+    }
+
+    free(ans);
+}
+
+int* distributeCandies(int candies, int num_people, int* returnSize)
+{
+    /* 分配 */
+    int cnt = 0;
+    int *ans = (int*)calloc(num_people, sizeof(int));
+    *returnSize = num_people;
+
+    while (candies) {
+        ans[cnt % num_people] += min_int(candies, cnt + 1);
+        candies -= min_int(candies, cnt + 1);
+        cnt++;
+    }
+
+    return ans;
+}
+
+char * defangIPaddr(char * address)
+{
+    int len = strlen(address);
+    char *ans = (char*)malloc(sizeof(char) * len * 2);
+    int ans_len = 0;
+
+    for (int i = 0; i < len; i++) {
+        if (address[i] != '.') {
+            ans[ans_len++] = address[i];
+        } else {
+            ans[ans_len++] = '[';
+            ans[ans_len++] = '.';
+            ans[ans_len++] = ']';
+        }
+    }
+
+    ans[ans_len] = '\0';
+    return ans;
+}
+
+bool cmp(void *a, void *b)
+{
+    return *(int*)a > *(int*)b;
+}
+
+int* relativeSortArray(int* arr1, int arr1Size, int* arr2, int arr2Size, int* returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * arr1Size);
+    int ans_len = 0;
+
+    /* 复制 */
+    for (int i = 0; i < arr2Size; i++) {
+        for (int j = 0; j < arr1Size; j++) {
+            if (arr2[i] == arr1[j]) {
+                ans[ans_len++] = arr1[j];
+                arr1[j] = -1;
+            }
+        }
+    }
+
+    /* 排序 */
+    qsort(arr1, arr1Size, sizeof(int), cmp);
+
+    /* 添加 */
+    for (int i = ans_len; i < arr1Size; i++) {
+        ans[ans_len++] = arr1[i];
+    }
+
+    *returnSize = ans_len;
+    return ans;
+}
+
+int numEquivDominoPairs(int** dominoes, int dominoesSize, int* dominoesColSize)
+{
+    int cnt[10][10] = {0};
+    for (int i = 0; i < dominoesSize; ++i) {
+        int a = dominoes[i][0];
+        int b = dominoes[i][1];
+        if (a < b) {
+            cnt[a][b]++;
+        } else {
+            cnt[b][a]++;
+        }
+    }
+    int ret = 0;
+    for (int i = 1; i < 10; ++i) {
+        for (int j = 1; j < 10; ++j) {
+            ret += cnt[i][j] * (cnt[i][j] - 1) / 2;
+        }
+    }
+    return ret;
+}
+
+int tribonacci(int n)
+{
+    if (n == 0) {
+        return 0;
+    } else if (n == 1) {
+        return 1;
+    } else if (n == 2) {
+        return 1;
+    }
+
+    int a = 0, b = 1, c = 1;
+    int s;
+    for (int i = 3; i <= n; i++) {
+        s = a + b + c;
+        a = b;
+        b = c;
+        c = s;
+    }
+
+    return s;
+}
+
+int dayOfYear(char* date)
+{
+    /* m 月之前的所有天数，未加闰年 */
+    int days[] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334};
+    char *buf = (char*)malloc(sizeof(char) * (strlen(date) + 1));
+    strcpy(buf, date);
+
+    char *str = strtok(buf, "-");
+    int y = atoi(str);
+    str = strtok(NULL, "-");
+    int m = atoi(str);
+    str = strtok(NULL, "-");
+    int d = atoi(str);
+
+    int dy = days[m - 1] + d;
+    if (isRyear(y) && m > 2) {
+        dy += 1;
+    }
+
+    return dy;
+}
+
+int countCharacters(char** words, int wordsSize, char* chars)
+{
+    /* 构建 chars 哈希表 */
+    int chars_hash[26] = {0};
+    for (int i = 0; i < strlen(chars); i++) {
+        chars_hash[chars[i] - 'a']++;
+    }
+
+    int ans = 0;
+    int chars_hash_tmp[26];
+    for (int i = 0; i < wordsSize; i++) {
+        memcpy(chars_hash_tmp, chars_hash, sizeof(int) * 26);
+        char *str = words[i];
+        int len = strlen(str);
+        int k;
+        for (k = 0; k < len; k++) {
+            if (chars_hash_tmp[str[k] - 'a'] == 0) {
+                break;
+            }
+            chars_hash_tmp[str[k] - 'a']--;
+        }
+
+        if (k >= len) {
+            ans += len;
+        }
+    }
+
+    return ans;
+}
+
+int numPrimeArrangements(int n)
+{
+    /* 统计 [1, n] 中质数的个数 */
+    int cnt = 0;
+    int N = 1000000007;
+    for (int i = 1; i <= n; i++) {
+        if (isPrime(i)) {
+            cnt++;
+        }
+    }
+
+    /* [1, n] 中质数也就是对应的下标保持一致 */
+    /* 全排列组合 */
+    int n1 = cnt;
+    long s1 = 1;
+    int n2 = n - n1;
+    long s2 = 1;
+
+    while (n1 > 1) {
+        s1 = s1 * n1 % N;
+        n1 -= 1;
+    }
+
+    while (n2 > 1) {
+        s2 *= n2;
+        s2 %= N;
+        n2 -= 1;
+    }
+
+    return s1 * s2 % N;
+}
+
+int distanceBetweenBusStops(int* distance, int distanceSize, int start, int destination)
+{
+    /* 计算 start --> des */
+    int sum1 = 0;
+    for (int i = start; i != destination; i = (i + 1) % distanceSize) {
+        sum1 += distance[i];
+    }
+
+    /* 计算 des ---> start */
+    int sum2 = 0;
+    for (int i = destination; i != start; i = (i + 1) % distanceSize) {
+        sum2 += distance[i];
+    }
+
+    return sum1 < sum2? sum1 : sum2;
+}
+

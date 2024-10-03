@@ -72,3 +72,25 @@ bool isChar(char c)
 {
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
+
+bool isRyear(int year)
+{
+    return (year % 4 == 0 && year % 100 != 0 || year % 400 == 0);
+}
+
+bool isPrime(int num)
+{
+    if (num < 2) {
+        return false;
+    } else if (num == 2) {
+        return true;
+    }
+
+    for (int i = 2; i < num; i++) {
+        if (num % i == 0) {
+            return false;
+        }
+    }
+
+    return true;
+}

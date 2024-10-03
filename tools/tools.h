@@ -11,8 +11,8 @@ void getNext(char *p_str, int *next, int nextSize);
 bool kmp_str(char *src, char *des);
 
 /* 大小比较 */
-#define min_int(x, y) (x < y? x : y)
-#define max_int(x, y) (x > y? x : y)
+#define min_int(x, y) ((x) < (y)? (x) : (y))
+#define max_int(x, y) ((x) > (y)? (x) : (y))
 
 /* 辗转相除法 */
 /**
@@ -25,4 +25,21 @@ int gcd(int m, int n);
 
 bool isChar(char c);
 
+/**
+ * @brief 判别是否是闰年
+ * 
+ * @param year 年份
+ * @return true 是
+ * @return false 否
+ */
+bool isRyear(int year);
+
+/**
+ * @brief 判断是否为质数
+ * 
+ * @param num 
+ * @return true 
+ * @return false 
+ */
+bool isPrime(int num);
 #endif
