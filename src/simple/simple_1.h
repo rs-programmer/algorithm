@@ -41,8 +41,25 @@ int dayOfYear(char* date);
 int countCharacters(char** words, int wordsSize, char* chars);
 int numPrimeArrangements(int n);
 int distanceBetweenBusStops(int* distance, int distanceSize, int start, int destination);
-
-
+char* dayOfTheWeek(int day, int month, int year);
+int maxNumberOfBalloons(char* text);
+int** minimumAbsDifference(int* arr, int arrSize, int* returnSize, int** returnColumnSizes);
+bool uniqueOccurrences(int* arr, int arrSize);
+int minCostToMoveChips(int* position, int positionSize);
+int balancedStringSplit(char* s);
+bool checkStraightLine(int** coordinates, int coordinatesSize, int* coordinatesColSize);
+int minTimeToVisitAllPoints(int** points, int pointsSize, int* pointsColSize);
+char* tictactoe(int** moves, int movesSize, int* movesColSize);
+int subtractProductAndSum(int n);
+int findSpecialInteger(int* arr, int arrSize);
+int getDecimalValue(struct ListNode* head);
+int findNumbers(int* nums, int numsSize);
+int* replaceElements(int* arr, int arrSize, int* returnSize);
+int* sumZero(int n, int* returnSize);
+char* freqAlphabets(char* s);
+int* decompressRLElist(int* nums, int numsSize, int* returnSize);
+int* getNoZeroIntegers(int n, int* returnSize);
+int maximum69Number (int num);
 
 
 #endif

@@ -746,3 +746,547 @@ int distanceBetweenBusStops(int* distance, int distanceSize, int start, int dest
     return sum1 < sum2? sum1 : sum2;
 }
 
+char* dayOfTheWeek(int day, int month, int year)
+{
+    char *week[7] = { "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    int monthday[12] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30 };
+    /* [1971, year) 一共包含多少天 */
+    int days = 0;
+
+    days += 365 * (year - 1971);
+    /* 计算闰年 */
+    for (int i = 1971; i < year; i++) {
+        if (isRyear(i)) {
+            days += 1;
+        }
+    }
+
+    /* year这一年中包含的天数 */
+    for (int i = 0; i < month - 1; i++) {
+        days += monthday[i];
+        if (i == 1 && isRyear(year)) {
+            /* 闰年二月 */
+            days += 1;
+        }
+    }
+
+    /* day */
+    days += day;
+    days -= 1;
+    /* 1971.01.01 是星期五 */
+    int x = days % 7;
+    x = (4 + x) % 7;
+    return week[x];
+}
+
+int maxNumberOfBalloons(char* text)
+{
+    int hash[26] = {0};
+    char *str = "balloon";
+    if (strlen(text) < strlen(str)) {
+        return 0;
+    }
+
+    for (int i = 0; i < strlen(text); i++) {
+        hash[text[i] - 'a']++;
+    }
+
+    /* 统计出现的 str 的次数 */
+    int ans = 0;
+    while (1) {
+        for (int i = 0; i < strlen(str); i++) {
+            if (hash[str[i] - 'a'] <= 0) {
+                return ans;
+            }
+
+            hash[str[i] - 'a']--;
+        }
+        ans++;
+    }
+}
+
+bool asc_order(const int *a, const int *b)
+{
+    return *a > *b;
+}
+
+int** minimumAbsDifference(int* arr, int arrSize, int* returnSize, int** returnColumnSizes)
+{
+    /* 数据构建 */
+    int *columns = (int*)malloc(sizeof(int) * arrSize);
+    int col = 0;
+    *returnColumnSizes = columns;
+
+    /* 升序排列 */
+    qsort(arr, arrSize, sizeof(int), asc_order);
+
+    /* 寻找最小的差距值 */
+    int min = __INT_MAX__;
+    for (int i = 0; i < arrSize - 1; i++) {
+        if (arr[i + 1] - arr[i] < min) {
+            min = arr[i + 1] - arr[i];
+        }
+    }
+
+    int **ans = (int**)malloc(sizeof(int*) * arrSize);
+    *returnSize = 0;
+    for (int i = 0; i < arrSize - 1; i++) {
+        if (arr[i + 1] - arr[i] == min) {
+            int *tmp = (int*)malloc(sizeof(int) * 2);
+            tmp[0] = arr[i];
+            tmp[1] = arr[i + 1];
+            columns[col++] = 2;
+            ans[*returnSize] = tmp;
+            *returnSize += 1;
+        }
+    }
+
+    return ans;
+}
+
+bool uniqueOccurrences(int* arr, int arrSize)
+{
+    int hash[2001] = {0};
+    for (int i = 0; i < arrSize; i++) {
+        hash[arr[i] + 1000]++;
+    }
+    
+    /* 在判断是否出现相同频率 */
+    bool freq[2001] = {false};
+    for (int i = 0; i < 2001; i++) {
+        if (hash[i] == 0) {
+            continue;
+        }
+
+        if (freq[hash[i]] == false) {
+            freq[hash[i]] = true;
+        } else {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int minCostToMoveChips(int* position, int positionSize)
+{
+    /* 全部先移动2个 */
+    int arr[2] = {0};
+    for (int i = 0; i < positionSize; i++) {
+        if (position[i] % 2 == 0) {
+            arr[0]++;
+        } else {
+            arr[1]++;
+        }
+    }
+
+    return arr[0] < arr[1]? arr[0] : arr[1];
+}
+
+int balancedStringSplit(char* s)
+{
+    int l_num = 0, r_num = 0;
+    int cnt = 0;
+    for (int i = 0; i < strlen(s); i++) {
+        if (s[i] == 'R') {
+            r_num++;
+        } else {
+            l_num++;
+        }
+
+        /* 判断是否相同 */
+        if (r_num == l_num) {
+            cnt++;
+            r_num = 0;
+            l_num = 0;
+        }
+    }
+
+    return cnt;
+}
+
+bool checkStraightLine(int** coordinates, int coordinatesSize, int* coordinatesColSize)
+{
+    /* 斜率 */
+    int dy = coordinates[1][1] - coordinates[0][1];
+    int dx = coordinates[1][0] - coordinates[0][0];
+    for (int i = 2; i < coordinatesSize; i++) {
+        int y = coordinates[i][1] - coordinates[0][1];
+        int x = coordinates[i][0] - coordinates[0][0];
+        if (dy * x != dx * y) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
+int oddCells(int m, int n, int** indices, int indicesSize, int* indicesColSize)
+{
+    /* 记录每一行每一列操作的次数 */
+    int *rows = (int*)calloc(m, sizeof(int));
+    int *cols = (int*)calloc(n, sizeof(int));
+    for (int i = 0; i < indicesSize; i++) {
+        rows[indices[i][0]]++;
+        cols[indices[i][1]]++;
+    }
+
+    int cnt = 0;
+    /* 编列rows与cols */
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            if ((rows[i] + cols[j]) % 2 != 0) {
+                cnt++;
+            }
+        }
+    }
+    free(rows);
+    free(cols);
+
+    return cnt;
+}
+
+int** shiftGrid(int** grid, int gridSize, int* gridColSize, int k, int* returnSize, int** returnColumnSizes)
+{
+    /* data create */
+    int row = gridSize;
+    int col = *gridColSize;
+    *returnColumnSizes = (int*)malloc(sizeof(int) * row);
+    *returnSize = 0;
+
+    /* 确定 K 次迁移之后的原点位置 */
+    int col_end = 0;
+    int row_end = 0;
+    int col_tmp = 0;
+
+    if (k != 0) {
+        /* 先跳转到最后一个元素 */
+        k--;
+        col_end = (col - 1) - (k % col);
+        row_end = (row - 1) - (k / col) % row;
+    }
+
+    /* 重新构建一个新的数组 */
+    int **ans = (int**)malloc(sizeof(int*) * row);
+    for (int i = 0; i < row; i++) {
+        int *tmp = (int*)malloc(sizeof(int) * col);
+        for (int j = 0; j < col; j++) {
+            /* add data */
+            tmp[j] = grid[row_end][col_end];
+            col_tmp = col_end;
+            col_end = (col_end + 1) % col;
+            if (col_end <= col_tmp) {
+                /* 出现了换行 */
+                row_end = (row_end + 1) % row;
+            }
+        }
+        (*returnColumnSizes)[*returnSize] = col;
+        ans[*returnSize] = tmp;
+        *returnSize += 1;
+    }
+
+    return ans;
+}
+
+int minTimeToVisitAllPoints(int** points, int pointsSize, int* pointsColSize)
+{
+    if (pointsSize == 0) {
+        return 0;
+    }
+
+    int path = 0;
+    int x = points[0][0];
+    int y = points[0][1];
+    int dx, dy;
+    for (int i = 1; i < pointsSize; i++) {
+        /* 计算绝对插值 */
+        dx = abs(points[i][0] - x);
+        dy = abs(points[i][1] - y);
+        x = points[i][0];
+        y = points[i][1];
+        path += max_int(dx, dy);
+    }
+
+    return path;
+}
+
+char* tictactoe(int** moves, int movesSize, int* movesColSize)
+{
+    /* A: 1, B: -1 */
+    int arr[3][3] = {0};
+    int val = 1;
+    for (int i = 0; i < movesSize; i++) {
+        arr[moves[i][0]][moves[i][1]] = val;
+        val = -val;
+    }
+
+    /* 对角线元素相加 */
+    int sum1 = arr[0][0] + arr[1][1] + arr[2][2];
+    int sum2 = arr[0][2] + arr[1][1] + arr[2][0];
+    if (sum1 == 3 || sum2 == 3) {
+        return "A";
+    }
+    if (sum1 == -3 || sum2 == -3) {
+        return "B";
+    }
+
+    /* 检测每行 */
+    int sum3 = 0;
+    sum1 = arr[0][0] + arr[0][1] + arr[0][2];
+    sum2 = arr[1][0] + arr[1][1] + arr[1][2];
+    sum3 = arr[2][0] + arr[2][1] + arr[2][2];
+    if (sum1 == 3 || sum2 == 3 || sum3 == 3) {
+        return "A";
+    }
+
+    if (sum1 == -3 || sum2 == -3 || sum3 == -3) {
+        return "B";
+    }
+
+    sum1 = arr[0][0] + arr[1][0] + arr[2][0];
+    sum2 = arr[0][1] + arr[1][1] + arr[2][1];
+    sum3 = arr[0][2] + arr[1][2] + arr[2][2];
+    if (sum1 == 3 || sum2 == 3 || sum3 == 3) {
+        return "A";
+    }
+
+    if (sum1 == -3 || sum2 == -3 || sum3 == -3) {
+        return "B";
+    }
+
+    if (movesSize == 9) {
+        return "Draw";
+    }
+    
+    return "Pending";
+}
+
+int subtractProductAndSum(int n)
+{
+    int nums[10];
+    int len = 0;
+    while (n != 0) {
+        nums[len++] = (n % 10);
+        n /= 10;
+    }
+
+    int sum = 0;
+    long int sub = 1;
+    for (int i = 0; i < len; i++) {
+        sum += nums[i];
+        sub *= nums[i];
+    }
+
+    return sub - sum;
+}
+
+int findSpecialInteger(int* arr, int arrSize)
+{
+    if (arrSize == 1) {
+        return arr[0];
+    }
+
+    /* 循环数组，统计元素出现的次数 */
+    int cnt = 1;
+    for (int i = 1; i < arrSize; i++) {
+        if (4 * cnt > arrSize) {
+            /* 元素出现的次数超过了总数的 25% */
+            return arr[i - 1];
+        }
+
+        if (arr[i] == arr[i - 1]) {
+            cnt++;
+        } else {
+            cnt = 1;
+        }
+    }
+
+    if (4 * cnt > arrSize) {
+        /* 元素出现的次数超过了总数的 25% */
+        return arr[arrSize - 1];
+    } else {
+        return 0;
+    }
+}
+
+int getDecimalValue(struct ListNode* head)
+{
+    int sum = 0;
+    while (head != NULL) {
+        sum <<= 1;
+        sum |= head->val;
+        head = head->next;
+    }
+
+    return sum;
+}
+
+int findNumbers(int* nums, int numsSize)
+{
+    int cnt = 0;
+    for (int i = 0; i < numsSize; i++) {
+        int n = nums[i];
+        int bits = 0;
+        /* 判断 n 的位数 */
+        while (n != 0) {
+            bits++;
+            n /= 10;
+        }
+
+        if (bits % 2 == 0) {
+            cnt++;
+        }
+    }
+
+    return cnt;
+}
+
+int* replaceElements(int* arr, int arrSize, int* returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * arrSize);
+    *returnSize = 0;
+    while (*returnSize < arrSize - 1) {
+        /* 寻找 *returnSize 之后的最大元素下标 */
+        int max_i = *returnSize + 1;
+        for (int i = *returnSize + 1; i < arrSize; i++) {
+            if (arr[i] > arr[max_i]) {
+                /* 找到较大值 */
+                max_i = i;
+            }
+        }
+
+        /* 从 *returnSize 开始到 i */
+        for (int k = *returnSize; k < max_i; k++) {
+            ans[k] = arr[max_i];
+        }
+
+        *returnSize = max_i;
+    }
+
+    ans[*returnSize] = -1;
+    *returnSize += 1;
+    return ans;
+}
+
+int* sumZero(int n, int* returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * n);
+    *returnSize = 0;
+    int k = n / 2;
+    for (int i = 0; i < k; i++) {
+        ans[(*returnSize)++] = i + 1;
+        ans[(*returnSize)++] = -(i + 1);
+    }
+
+    if (n % 2) {
+        ans[(*returnSize)++] = 0;
+    }
+
+    return ans;
+}
+
+char* freqAlphabets(char* s)
+{
+    int s_len = strlen(s);
+    char *ans = (char*)malloc(sizeof(char) * (s_len + 1));
+    int id = 0;
+    for (int i = 0; i < s_len;) {
+        if (i + 2 < s_len) {
+            if (s[i + 2] != '#') {
+                /* 直接转换 */
+                ans[id++] = 'a' + (s[i] - '1');
+                i++;
+            } else {
+                /* 两个连续数字 */
+                ans[id++] = 'j' + (s[i] - '0') * 10 + (s[i + 1] - '0') - 10;
+                i += 3;
+            }
+        } else {
+            /* 直接转换 */
+            ans[id++] = 'a' + (s[i] - '1');
+            i++;
+        }
+    }
+
+    ans[id] = '\0';
+    return ans;
+}
+
+int* decompressRLElist(int* nums, int numsSize, int* returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * numsSize);
+    int id = 0;
+    int total = numsSize;
+    for (int i = 0; i < numsSize; i += 2) {
+        /* nums[i] 个 nums[i+1] */
+        for (int k = 0; k < nums[i]; k++) {
+            if (id == total - 1) {
+                /* 动态申请内存空间 */
+                ans = (int*)realloc(ans, sizeof(int) * total * 2);
+                total *= 2;
+            }
+
+            ans[id++] = nums[i + 1];
+        }
+    }
+
+    *returnSize = id;
+    return ans;
+}
+bool zoon(int n)
+{
+    while (n) {
+        if (n % 10 == 0) {
+            return false;
+        }
+        n /= 10;
+    }
+    
+    return true;
+}
+
+int* getNoZeroIntegers(int n, int* returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * 2);
+    *returnSize = 2;
+
+    for (int i = 1; i < n; i++) {
+        int x = i;
+        int y = n - i;
+        /* 判断是否包含 0 */
+        if (zoon(x) && zoon(y)) {
+            ans[0] = x;
+            ans[1] = y;
+            break;
+        }
+    }
+
+    return ans;
+}
+
+int maximum69Number (int num)
+{
+    /* 将最高位的6变成9 */
+    stack_t *sta = create_stack(10);
+    while (num) {
+        int x = num % 10;
+        push_stack(sta, x);
+        num /= 10;
+    }
+
+    bool flag = false;
+    int sum = 0;
+    while (!is_empty_stack(sta)) {
+        int x = (int)top_stack(sta);
+        pop_stack(sta);
+        if (!flag && x == 6) {
+            x = 9;
+            flag = true;
+        }
+
+        sum += x * pow(10, sta->size);
+    }
+
+    free_stack(sta);
+    return sum;
+}

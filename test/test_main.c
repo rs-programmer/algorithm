@@ -3,7 +3,9 @@
 
 int main()
 {
-    int arr[] = {1, 2, 3, 4};
-    distanceBetweenBusStops(arr, 4, 0, 1);
+    int arr[] = {17, 18, 5, 4, 6, 1};
+    int size = sizeof(arr) / sizeof(arr[0]);
+    int rs;
+    freqAlphabets("10#11#12");
     return 0;
 }

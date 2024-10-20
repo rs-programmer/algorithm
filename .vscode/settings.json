@@ -9,6 +9,7 @@
         "math.h": "c",
         "simple_1.h": "c",
         "pthread.h": "c",
-        "chrono": "c"
+        "chrono": "c",
+        "simple.h": "c"
     }
 }
