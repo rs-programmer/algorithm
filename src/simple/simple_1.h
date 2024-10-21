@@ -60,6 +60,7 @@ char* freqAlphabets(char* s);
 int* decompressRLElist(int* nums, int numsSize, int* returnSize);
 int* getNoZeroIntegers(int n, int* returnSize);
 int maximum69Number (int num);
-
+int* arrayRankTransform(int* arr, int arrSize, int* returnSize);
+int removePalindromeSub(char* s);
 
 #endif

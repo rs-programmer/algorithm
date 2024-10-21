@@ -94,3 +94,67 @@ bool isPrime(int num)
 
     return true;
 }
+
+bool search_binary_left(int *arr, int arrSize, int target, int *id)
+{
+    int left = 0, right = arrSize - 1;
+    int mid;
+
+    while (left <= right) {
+        mid = left + (right - left) / 2;
+        if (arr[mid] < target) {
+            left = mid + 1;
+        } else if (arr[mid] > target) {
+            right = mid - 1;
+        } else {
+            /* 查找最左边值 */
+            if (mid == 0 || arr[mid - 1] != arr[mid]) {
+                *id = mid;
+                return true;
+            } else {
+                right = mid - 1;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool search_binary_right(int *arr, int arrSize, int target, int *id)
+{
+    int left = 0, right = arrSize - 1;
+    int mid;
+
+    while (left <= right) {
+        mid = left + (right - left) / 2;
+        if (arr[mid] < target) {
+            left = mid + 1;
+        } else if (arr[mid] > target) {
+            right = mid - 1;
+        } else {
+            /* 查找最左边值 */
+            if (mid == arrSize - 1 || arr[mid + 1] != arr[mid]) {
+                *id = mid;
+                return true;
+            } else {
+                left = mid + 1;
+            }
+        }
+    }
+
+    return false;
+}
+
+void arr_hash(int *arr, int arrSize, int *newSize)
+{
+    /* 数组元素去重 */
+    int j = 0;
+    for (int i = 1; i < arrSize; i++) {
+        if (arr[i] != arr[j]) {
+            j++;
+            arr[j] = arr[i];
+        }
+    }
+
+    *newSize = j + 1;
+}

@@ -42,4 +42,8 @@ bool isRyear(int year);
  * @return false 
  */
 bool isPrime(int num);
+
+bool search_binary_left(int *arr, int arrSize, int target, int *id);
+bool search_binary_right(int *arr, int arrSize, int target, int *id);
+void arr_hash(int *arr, int arrSize, int *newSize);
 #endif

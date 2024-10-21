@@ -1290,3 +1290,33 @@ int maximum69Number (int num)
     free_stack(sta);
     return sum;
 }
+
+int* arrayRankTransform(int* arr, int arrSize, int* returnSize)
+{
+    int *tmp = (int*)malloc(sizeof(int) * arrSize);
+    memcpy(tmp, arr, sizeof(int) * arrSize);
+
+    /* 排序: 从小到大排序 */
+    qsort(tmp, arrSize, sizeof(int), cmp);
+    int tmp_len;
+    /* 数组元素去重 */
+    arr_hash(tmp, arrSize, &tmp_len);
+
+    int *ans = (int*)malloc(sizeof(int) * arrSize);
+    *returnSize = 0;
+    int id;
+    for (int i = 0; i < arrSize; i++) {
+        /* 二分查找 找最左边值 */
+        search_binary_left(tmp, tmp_len, arr[i], &id);
+        ans[*returnSize] = (id + 1);
+        *returnSize += 1;
+    }
+
+    free(tmp);
+    return ans;
+}
+
+int removePalindromeSub(char* s)
+{
+    
+}
