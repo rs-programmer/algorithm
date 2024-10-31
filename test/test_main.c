@@ -7,4 +7,3 @@ int main()
     removeOuterParentheses(s);
     return 0;
 }
-

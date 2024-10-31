@@ -1,9 +1,9 @@
 #include "stack.h"
 
-stack_t* create_stack(int capacity)
+stack_t *create_stack(int capacity)
 {
-    stack_t *stack = (stack_t*)malloc(sizeof(stack_t));
-    stack->arr = (ElemType*)malloc(sizeof(ElemType) * capacity);
+    stack_t *stack = (stack_t *)malloc(sizeof(stack_t));
+    stack->arr = (ElemType *)malloc(sizeof(ElemType) * capacity);
     stack->top = -1;
     stack->capacity = capacity;
     stack->size = 0;
@@ -13,11 +13,10 @@ stack_t* create_stack(int capacity)
 
 void free_stack(stack_t *stack)
 {
-    if (stack == NULL)
-    {
+    if (stack == NULL) {
         return;
     }
-    
+
     free(stack->arr);
     free(stack);
 }

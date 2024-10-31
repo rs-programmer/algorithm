@@ -1,6 +1,7 @@
 #include "simple_1.h"
 
-int largestSumAfterKNegations(int *nums, int numsSize, int k) {
+int largestSumAfterKNegations(int *nums, int numsSize, int k)
+{
     /* fast_sort 从小到大排序 */
     fast_sort(nums, 0, numsSize - 1);
 
@@ -36,7 +37,8 @@ int largestSumAfterKNegations(int *nums, int numsSize, int k) {
     return ans;
 }
 
-int bitwiseComplement(int n) {
+int bitwiseComplement(int n)
+{
     if (n == 0) {
         return 1;
     }
@@ -68,7 +70,8 @@ int bitwiseComplement(int n) {
     return ans;
 }
 
-bool canThreePartsEqualSum(int *arr, int arrSize) {
+bool canThreePartsEqualSum(int *arr, int arrSize)
+{
     /* 计算和 */
     int sum = 0;
     for (int i = 0; i < arrSize; i++) {
@@ -112,7 +115,8 @@ bool canThreePartsEqualSum(int *arr, int arrSize) {
     return true;
 }
 
-bool *prefixesDivBy5(int *nums, int numsSize, int *returnSize) {
+bool *prefixesDivBy5(int *nums, int numsSize, int *returnSize)
+{
     bool *ans = (bool *)malloc(sizeof(bool) * numsSize);
     int ans_len = 0;
 
@@ -134,7 +138,8 @@ bool *prefixesDivBy5(int *nums, int numsSize, int *returnSize) {
     return ans;
 }
 
-char *removeOuterParentheses(char *s) {
+char *removeOuterParentheses(char *s)
+{
     int num = 0;
     int cur = 0;
     int s_len = strlen(s);
@@ -166,7 +171,8 @@ char *removeOuterParentheses(char *s) {
     return ans;
 }
 
-void sumNode(struct TreeNode *root, int sum, int *total) {
+void sumNode(struct TreeNode *root, int sum, int *total)
+{
     sum <<= 1;
     sum |= root->val;
     if (root->left == root->right && root->left == NULL) {
@@ -184,7 +190,8 @@ void sumNode(struct TreeNode *root, int sum, int *total) {
     }
 }
 
-int sumRootToLeaf(struct TreeNode *root) {
+int sumRootToLeaf(struct TreeNode *root)
+{
     int total = 0;
     if (root == NULL) {
         return 0;
@@ -194,12 +201,14 @@ int sumRootToLeaf(struct TreeNode *root) {
     return total;
 }
 
-bool divisorGame(int n) {
+bool divisorGame(int n)
+{
     /* 偶数赢 奇数输 */
     return !(n & 1);
 }
 
-int *kWeakestRows(int **mat, int matSize, int *matColSize, int k, int *returnSize) {
+int *kWeakestRows(int **mat, int matSize, int *matColSize, int k, int *returnSize)
+{
     int row = matSize;
     int col = matColSize[0];
     /* 统计每一行的军人数目 */

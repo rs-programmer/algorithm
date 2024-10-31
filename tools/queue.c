@@ -1,13 +1,13 @@
 #include "queue.h"
 
-loop_queue_int_t* create_loop_queue_int(int capacity)
+loop_queue_int_t *create_loop_queue_int(int capacity)
 {
-    loop_queue_int_t *queue = (loop_queue_int_t*)malloc(sizeof(loop_queue_int_t));
+    loop_queue_int_t *queue = (loop_queue_int_t *)malloc(sizeof(loop_queue_int_t));
     queue->capacity = capacity;
     queue->size = 0;
     queue->front = 0;
     queue->rear = 0;
-    queue->arr = (int*)malloc(sizeof(int) * capacity);
+    queue->arr = (int *)malloc(sizeof(int) * capacity);
 
     return queue;
 }

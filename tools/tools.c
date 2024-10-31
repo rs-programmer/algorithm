@@ -33,7 +33,7 @@ bool kmp_str(char *src, char *des)
     int des_len = strlen(des);
 
     // 先计算 des 的 next
-    int *next = (int*)malloc(sizeof(int) * des_len);
+    int *next = (int *)malloc(sizeof(int) * des_len);
     getNext(des, next, des_len);
 
     int src_id = 0, des_id = 0;

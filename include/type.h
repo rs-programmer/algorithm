@@ -10,8 +10,7 @@
 #include <stdbool.h>
 #include <ctype.h>
 
-typedef enum
-{
+typedef enum {
     ERROR = 0,
     SUCCESS = 1
 } RET_CODE_T;

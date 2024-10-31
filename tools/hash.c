@@ -1,6 +1,7 @@
 #include "hash.h"
 
-void free_hash_char(hash_char_t *hash) {
+void free_hash_char(hash_char_t *hash)
+{
     // 后序遍历，删除所有节点
     if (hash == NULL) {
         return;
@@ -13,18 +14,19 @@ void free_hash_char(hash_char_t *hash) {
     free(hash);
 }
 
-hash_char_t* add_hash_char(hash_char_t *hash, const char *str) {
+hash_char_t *add_hash_char(hash_char_t *hash, const char *str)
+{
     if (hash == NULL) {
         // 没有这个节点，则添加
-        char *p_str = (char*)malloc(sizeof(char) * (strlen(str) + 1));
-        hash_char_t *node = (hash_char_t*)malloc(sizeof(hash_char_t));
+        char *p_str = (char *)malloc(sizeof(char) * (strlen(str) + 1));
+        hash_char_t *node = (hash_char_t *)malloc(sizeof(hash_char_t));
         node->key = p_str;
         node->left = NULL;
         node->right = NULL;
         return node;
     }
 
-    int k = strcmp((char*)hash->key, (char*)str);
+    int k = strcmp((char *)hash->key, (char *)str);
 
     if (k == 0) {
         // 存在相同节点，直接返回当前节点
@@ -40,15 +42,15 @@ hash_char_t* add_hash_char(hash_char_t *hash, const char *str) {
     }
 }
 
-int find_hash_char(const hash_char_t *hash, const char* str) {
+int find_hash_char(const hash_char_t *hash, const char *str)
+{
     // 先序查找
     if (hash == NULL) {
         return -1;
     }
 
     int k = strcmp(hash->key, str);
-    if (k == 0)
-    {
+    if (k == 0) {
         return 0;
     } else if (k > 0) {
         // 左边
@@ -59,7 +61,8 @@ int find_hash_char(const hash_char_t *hash, const char* str) {
     }
 }
 
-hash_char_t* del_hash_char(hash_char_t *hash, const char* str) {
+hash_char_t *del_hash_char(hash_char_t *hash, const char *str)
+{
     if (hash == NULL) {
         return NULL;
     }
@@ -122,11 +125,11 @@ void free_hash_int(hash_int_t *hash)
     free(hash);
 }
 
-hash_int_t* add_hash_int(hash_int_t *hash, int num)
+hash_int_t *add_hash_int(hash_int_t *hash, int num)
 {
     if (hash == NULL) {
         // 没有这个节点，则添加
-        hash_int_t *node = (hash_int_t*)malloc(sizeof(hash_int_t));
+        hash_int_t *node = (hash_int_t *)malloc(sizeof(hash_int_t));
         node->key = num;
         node->left = NULL;
         node->right = NULL;
@@ -157,8 +160,7 @@ int find_hash_int(const hash_int_t *hash, int num)
     }
 
     int k = hash->key - num;
-    if (k == 0)
-    {
+    if (k == 0) {
         return 0;
     } else if (k > 0) {
         // 左边
@@ -169,7 +171,7 @@ int find_hash_int(const hash_int_t *hash, int num)
     }
 }
 
-hash_int_t* del_hash_int(hash_int_t *hash, int num)
+hash_int_t *del_hash_int(hash_int_t *hash, int num)
 {
     if (hash == NULL) {
         return NULL;
@@ -214,4 +216,3 @@ hash_int_t* del_hash_int(hash_int_t *hash, int num)
         return hash;
     }
 }
-

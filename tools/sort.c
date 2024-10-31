@@ -24,7 +24,6 @@ void bubble_sort(int *arr, int len)
     }
 }
 
-
 void insert_sort(int *arr, int len)
 {
     /* i 之前的所有数据均为有序 */
@@ -40,7 +39,6 @@ void insert_sort(int *arr, int len)
         arr[++j] = val;
     }
 }
-
 
 void search_sort(int *arr, int len)
 {

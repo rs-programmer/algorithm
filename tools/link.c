@@ -1,8 +1,8 @@
 #include "link.h"
 
-link_t* create_link()
+link_t *create_link()
 {
-    link_t *link = (link_t*)malloc(sizeof(link_t));
+    link_t *link = (link_t *)malloc(sizeof(link_t));
     link->head = NULL;
     link->size = 0;
     return link;
@@ -36,7 +36,7 @@ void append_link(link_t *link, ElemType val)
     /* 尾部添加节点 */
     link_node_t *node = link->head;
     if (node == NULL) {
-        link_node_t *tmp = (link_node_t*)malloc(sizeof(link_node_t));
+        link_node_t *tmp = (link_node_t *)malloc(sizeof(link_node_t));
         tmp->next = NULL;
         tmp->val = val;
         link->head = tmp;
@@ -50,7 +50,7 @@ void append_link(link_t *link, ElemType val)
     }
 
     /* 添加节点 */
-    link_node_t *tmp = (link_node_t*)malloc(sizeof(link_node_t));
+    link_node_t *tmp = (link_node_t *)malloc(sizeof(link_node_t));
     tmp->next = NULL;
     tmp->val = val;
     node->next = tmp;
@@ -60,7 +60,7 @@ void append_link(link_t *link, ElemType val)
 void head_link(link_t *link, ElemType val)
 {
     /* 头插法 */
-    link_node_t *tmp = (link_node_t*)malloc(sizeof(link_node_t));
+    link_node_t *tmp = (link_node_t *)malloc(sizeof(link_node_t));
     tmp->val = val;
     tmp->next = link->head;
     link->head = tmp;
@@ -80,7 +80,7 @@ void insert_link(link_t *link, ElemType after, ElemType val)
         return;
     }
 
-    link_node_t *tmp = (link_node_t*)malloc(sizeof(link_node_t));
+    link_node_t *tmp = (link_node_t *)malloc(sizeof(link_node_t));
     tmp->val = val;
     tmp->next = node->next;
     node->next = tmp;
@@ -105,7 +105,7 @@ void del_item_link(link_t *link, ElemType val)
 
     if (p == NULL) {
         /* 删除头节点 */
-        link->head =node->next;
+        link->head = node->next;
         free(node);
         link->size -= 1;
         return;
@@ -116,4 +116,3 @@ void del_item_link(link_t *link, ElemType val)
     free(node);
     link->size -= 1;
 }
-

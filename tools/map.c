@@ -1,6 +1,7 @@
 #include "map.h"
 /* =================================================== */
-void free_map_char(map_char_t *map) {
+void free_map_char(map_char_t *map)
+{
     // 后序遍历，删除所有节点
     if (map == NULL) {
         return;
@@ -10,16 +11,17 @@ void free_map_char(map_char_t *map) {
     free_map_char(map->right);
 
     free(map->key);
-    free(map);    
+    free(map);
 }
 
-map_char_t* add_map_char(map_char_t *map, const char *str, int val) {
+map_char_t *add_map_char(map_char_t *map, const char *str, int val)
+{
     if (map == NULL) {
         // 没有这个节点，则添加
-        char *p_str = (char*)malloc(sizeof(char) * (strlen(str) + 1));
+        char *p_str = (char *)malloc(sizeof(char) * (strlen(str) + 1));
         strcpy(p_str, str);
 
-        map_char_t *node = (map_char_t*)malloc(sizeof(map_char_t));
+        map_char_t *node = (map_char_t *)malloc(sizeof(map_char_t));
         node->key = p_str;
         node->val = val;
         node->left = NULL;
@@ -43,15 +45,15 @@ map_char_t* add_map_char(map_char_t *map, const char *str, int val) {
     }
 }
 
-RET_CODE_T find_map_char(const map_char_t *map, const char *str, int *val) {
+RET_CODE_T find_map_char(const map_char_t *map, const char *str, int *val)
+{
     // 先序查找
     if (map == NULL) {
         return ERROR;
     }
 
     int k = strcmp(map->key, str);
-    if (k == 0)
-    {
+    if (k == 0) {
         *val = map->val;
         return SUCCESS;
     } else if (k > 0) {
@@ -63,7 +65,8 @@ RET_CODE_T find_map_char(const map_char_t *map, const char *str, int *val) {
     }
 }
 
-map_char_t* del_map_char(map_char_t *map, const char* str) {
+map_char_t *del_map_char(map_char_t *map, const char *str)
+{
     if (map == NULL) {
         return NULL;
     }
@@ -112,7 +115,6 @@ map_char_t* del_map_char(map_char_t *map, const char* str) {
     }
 }
 
-
 /* =================================================== */
 void free_map_int(map_int_t *map)
 {
@@ -126,11 +128,11 @@ void free_map_int(map_int_t *map)
 
     free(map);
 }
-map_int_t* add_map_int(map_int_t *map, const int key, int val)
+map_int_t *add_map_int(map_int_t *map, const int key, int val)
 {
     if (map == NULL) {
         // 没有这个节点，则添加
-        map_int_t *node = (map_int_t*)malloc(sizeof(map_int_t));
+        map_int_t *node = (map_int_t *)malloc(sizeof(map_int_t));
         node->key = key;
         node->val = val;
         node->left = NULL;
@@ -161,8 +163,7 @@ bool find_map_int(const map_int_t *map, const int key, int *val)
     }
 
     int k = map->key - key;
-    if (k == 0)
-    {
+    if (k == 0) {
         if (val != NULL) {
             *val = map->val;
         }
@@ -175,7 +176,7 @@ bool find_map_int(const map_int_t *map, const int key, int *val)
         return find_map_int(map->right, key, val);
     }
 }
-map_int_t* del_map_int(map_int_t *map, const int key)
+map_int_t *del_map_int(map_int_t *map, const int key)
 {
     if (map == NULL) {
         return NULL;
@@ -220,4 +221,3 @@ map_int_t* del_map_int(map_int_t *map, const int key)
         return map;
     }
 }
-

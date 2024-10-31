@@ -16,7 +16,7 @@ static void map_char_prosearch(map_char_t *map_char, char **p_str, int *minVal)
     map_char_prosearch(map_char->right, p_str, minVal);
 }
 
-char* mostCommonWord(char* paragraph, char** banned, int bannedSize)
+char *mostCommonWord(char *paragraph, char **banned, int bannedSize)
 {
     // 字符串分割
     char *p_str = strtok(paragraph, " ");
@@ -26,7 +26,7 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize)
         int p_str_len = strlen(p_str);
 
         // 内容拷贝到数组中
-        char *p_str_arr = (char*)malloc(sizeof(char) * (p_str_len + 1));
+        char *p_str_arr = (char *)malloc(sizeof(char) * (p_str_len + 1));
         strcpy(p_str_arr, p_str);
         toLower(p_str_arr, p_str_len);
 
@@ -57,12 +57,12 @@ char* mostCommonWord(char* paragraph, char** banned, int bannedSize)
     return min_p_str;
 }
 
-int* shortestToChar(char* s, char c, int* returnSize)
+int *shortestToChar(char *s, char c, int *returnSize)
 {
     int s_len = strlen(s);
     // 创建内存空间
-    int *rets = (int*)malloc(sizeof(int) * s_len);
-    int *temp = (int*)malloc(sizeof(int) * s_len);
+    int *rets = (int *)malloc(sizeof(int) * s_len);
+    int *temp = (int *)malloc(sizeof(int) * s_len);
 
     // 查询字符串中 c 所在的位置
     int c_id = 0;
@@ -89,24 +89,24 @@ int* shortestToChar(char* s, char c, int* returnSize)
     return rets;
 }
 
-char* toGoatLatin(char* sentence)
+char *toGoatLatin(char *sentence)
 {
     int sen_len = strlen(sentence);
-    char *p_arr = (char*)malloc(sizeof(char) * (sen_len + 1));
+    char *p_arr = (char *)malloc(sizeof(char) * (sen_len + 1));
     strcpy(p_arr, sentence);
 
     char op[10] = {'a', 'A', 'e', 'E', 'i', 'I', 'o', 'O', 'u', 'U'};
 
     // 创建一个大数组
-    char *ans = (char*) malloc(sizeof(char) * 1024); // 1KB
+    char *ans = (char *)malloc(sizeof(char) * 1024); // 1KB
     char *ma = "ma";
     int ma_len = strlen(ma);
 
     char *p_str = strtok(p_arr, " "); // 会修改 p_arr 元数据
-    bool p_flag = false; // 是否首字母为元音字母
-    int p_cnt = 1; // 当前第几个字符
-    int p_len = 0; // 当前字符的长度
-    int ans_id = 0; // ans 数组中已存入数据长度
+    bool p_flag = false;              // 是否首字母为元音字母
+    int p_cnt = 1;                    // 当前第几个字符
+    int p_len = 0;                    // 当前字符的长度
+    int ans_id = 0;                   // ans 数组中已存入数据长度
 
     while (p_str != NULL) {
         p_flag = false;
@@ -155,20 +155,20 @@ char* toGoatLatin(char* sentence)
     return ans;
 }
 
-int** largeGroupPositions(char* s, int* returnSize, int** returnColumnSizes)
+int **largeGroupPositions(char *s, int *returnSize, int **returnColumnSizes)
 {
     int s_len = strlen(s);
     *returnSize = 0;
 
-    int **ans_arr = (int**)malloc(sizeof(int*) * s_len);
-    *returnColumnSizes = (int*)malloc(sizeof(int) * s_len);
+    int **ans_arr = (int **)malloc(sizeof(int *) * s_len);
+    *returnColumnSizes = (int *)malloc(sizeof(int) * s_len);
 
     int j = 0, i = 1;
     for (i = 1; i < s_len; i++) {
         if (s[j] != s[i]) {
             if ((i - j) >= 3) {
                 // 符合条件
-                int *tmp_arr = (int*)malloc(sizeof(int) * 2);
+                int *tmp_arr = (int *)malloc(sizeof(int) * 2);
                 tmp_arr[0] = j;
                 tmp_arr[1] = i - 1;
                 ans_arr[*returnSize] = tmp_arr;
@@ -183,7 +183,7 @@ int** largeGroupPositions(char* s, int* returnSize, int** returnColumnSizes)
 
     if (i - j >= 3) {
         // 符合条件
-        int *tmp_arr = (int*)malloc(sizeof(int) * 2);
+        int *tmp_arr = (int *)malloc(sizeof(int) * 2);
         tmp_arr[0] = j;
         tmp_arr[1] = i - 1;
         ans_arr[*returnSize] = tmp_arr;
@@ -195,19 +195,19 @@ int** largeGroupPositions(char* s, int* returnSize, int** returnColumnSizes)
     return ans_arr;
 }
 
-int** flipAndInvertImage(int** image, int imageSize, int* imageColSize, int* returnSize, int** returnColumnSizes)
+int **flipAndInvertImage(int **image, int imageSize, int *imageColSize, int *returnSize, int **returnColumnSizes)
 {
     int row = imageSize;
     int col = *imageColSize;
 
-    int **ans_arr = (int**)malloc(sizeof(int*) * row);
+    int **ans_arr = (int **)malloc(sizeof(int *) * row);
     *returnSize = 0;
-    *returnColumnSizes = (int*)malloc(sizeof(int) * row);
+    *returnColumnSizes = (int *)malloc(sizeof(int) * row);
 
     // 循环每一行
     for (int i = 0; i < row; i++) {
         // copy
-        int *tmp_arr = (int*)malloc(sizeof(int) * col);
+        int *tmp_arr = (int *)malloc(sizeof(int) * col);
         for (int j = 0; j < col; j++) {
             tmp_arr[j] = image[i][j];
         }
@@ -215,8 +215,8 @@ int** flipAndInvertImage(int** image, int imageSize, int* imageColSize, int* ret
         int left = 0, right = col - 1;
         while (left < right) {
             // 反转
-            tmp_arr[left] = tmp_arr[left] == 1? 0 : 1;
-            tmp_arr[right] = tmp_arr[right] == 1? 0 : 1;
+            tmp_arr[left] = tmp_arr[left] == 1 ? 0 : 1;
+            tmp_arr[right] = tmp_arr[right] == 1 ? 0 : 1;
 
             //  交换
             int tmp = tmp_arr[left];
@@ -230,7 +230,7 @@ int** flipAndInvertImage(int** image, int imageSize, int* imageColSize, int* ret
 
         // 判断最后
         if (left == right) {
-            tmp_arr[left] = tmp_arr[left] == 1? 0 : 1;
+            tmp_arr[left] = tmp_arr[left] == 1 ? 0 : 1;
         }
 
         // 数据添加
@@ -242,7 +242,7 @@ int** flipAndInvertImage(int** image, int imageSize, int* imageColSize, int* ret
     return ans_arr;
 }
 
-bool isRectangleOverlap(int* rec1, int rec1Size, int* rec2, int rec2Size)
+bool isRectangleOverlap(int *rec1, int rec1Size, int *rec2, int rec2Size)
 {
     int x1 = rec1[0], x2 = rec1[2], x3 = rec2[0], x4 = rec2[2];
     int y1 = rec1[1], y2 = rec1[3], y3 = rec2[1], y4 = rec2[3];
@@ -253,7 +253,7 @@ bool isRectangleOverlap(int* rec1, int rec1Size, int* rec2, int rec2Size)
     return isRow && isCol;
 }
 
-bool backspaceCompare(char* s, char* t)
+bool backspaceCompare(char *s, char *t)
 {
     int s_len = strlen(s);
     int t_len = strlen(t);
@@ -296,7 +296,7 @@ bool backspaceCompare(char* s, char* t)
     return true;
 }
 
-bool buddyStrings(char* s, char* goal)
+bool buddyStrings(char *s, char *goal)
 {
     // 等价于仅存在两个字符不相同
     int s_len = strlen(s);
@@ -342,12 +342,11 @@ bool buddyStrings(char* s, char* goal)
     return false;
 }
 
-bool lemonadeChange(int* bills, int billsSize)
+bool lemonadeChange(int *bills, int billsSize)
 {
     int num_5 = 0, num_10 = 0, num_20 = 0;
 
-    for (int i = 0; i < billsSize; i++)
-    {
+    for (int i = 0; i < billsSize; i++) {
         if (bills[i] == 5) {
             num_5++;
         } else if (bills[i] == 10) {
@@ -369,20 +368,20 @@ bool lemonadeChange(int* bills, int billsSize)
         }
     }
 
-    return true;    
+    return true;
 }
 
-int** transpose(int** matrix, int matrixSize, int* matrixColSize, int* returnSize, int** returnColumnSizes)
+int **transpose(int **matrix, int matrixSize, int *matrixColSize, int *returnSize, int **returnColumnSizes)
 {
     int row = matrixSize;
     int col = *matrixColSize;
 
     // 创建 col 行，row 列 的数组
     *returnSize = 0;
-    int **ans_arr = (int**)malloc(sizeof(int*) * col);
-    (*returnColumnSizes) = (int*)malloc(sizeof(int) * col);
+    int **ans_arr = (int **)malloc(sizeof(int *) * col);
+    (*returnColumnSizes) = (int *)malloc(sizeof(int) * col);
     for (int i = 0; i < col; i++) {
-        int *tmp_arr = (int*)malloc(sizeof(int) * row);
+        int *tmp_arr = (int *)malloc(sizeof(int) * row);
         // 数据填充
         for (int r = 0; r < row; r++) {
             tmp_arr[r] = matrix[r][i];
@@ -429,7 +428,7 @@ int binaryGap(int n)
     return max_dest;
 }
 
-void pre_search_tree(struct TreeNode* root, int *arr, int *id)
+void pre_search_tree(struct TreeNode *root, int *arr, int *id)
 {
     if (root == NULL) {
         return;
@@ -445,7 +444,7 @@ void pre_search_tree(struct TreeNode* root, int *arr, int *id)
     pre_search_tree(root->right, arr, id);
 }
 
-bool leafSimilar(struct TreeNode* root1, struct TreeNode* root2)
+bool leafSimilar(struct TreeNode *root1, struct TreeNode *root2)
 {
     int arr_1[200] = {0}, id_1 = 0;
     int arr_2[200] = {0}, id_2 = 0;
@@ -467,7 +466,7 @@ bool leafSimilar(struct TreeNode* root1, struct TreeNode* root2)
     return true;
 }
 
-struct ListNode* middleNode(struct ListNode* head)
+struct ListNode *middleNode(struct ListNode *head)
 {
     if (head == NULL) {
         return NULL;
@@ -489,14 +488,14 @@ struct ListNode* middleNode(struct ListNode* head)
     return mid;
 }
 
-int projectionArea(int** grid, int gridSize, int* gridColSize)
+int projectionArea(int **grid, int gridSize, int *gridColSize)
 {
     int row = gridSize;
     int col = *gridColSize;
 
     // xy 平面面积 = 非零元素个数
     int area_xy = 0;
-    
+
     // yz 平面面积 = 每一行的最大值之和
     int area_yz = 0;
     for (int i = 0; i < row; i++) {
@@ -532,7 +531,7 @@ int projectionArea(int** grid, int gridSize, int* gridColSize)
     return area_xy + area_yz + area_xz;
 }
 
-char** uncommonFromSentences(char* s1, char* s2, int* returnSize)
+char **uncommonFromSentences(char *s1, char *s2, int *returnSize)
 {
     *returnSize = 0;
 
@@ -541,21 +540,21 @@ char** uncommonFromSentences(char* s1, char* s2, int* returnSize)
     int s2_len = strlen(s2);
     *returnSize = 0;
 
-    char **ans_arr = (char**)malloc(sizeof(char*) * (s1_len + s2_len));
+    char **ans_arr = (char **)malloc(sizeof(char *) * (s1_len + s2_len));
 
     // 合并 s1 s2
-    char *p_arr = (char*)malloc(sizeof(s1) * (s1_len + s2_len + 2));
+    char *p_arr = (char *)malloc(sizeof(s1) * (s1_len + s2_len + 2));
     strcpy(p_arr, s1);
     p_arr[s1_len] = ' ';
     strcpy(p_arr + s1_len + 1, s2);
 
     // 整合为二维数组
-    char **tar_arr = (char**)malloc(sizeof(char*) * (s1_len + s2_len));
+    char **tar_arr = (char **)malloc(sizeof(char *) * (s1_len + s2_len));
     int tar_arr_len = 0;
 
     char *p_tok = strtok(p_arr, " ");
     while (p_tok != NULL) {
-        char *tmp = (char*)malloc(sizeof(char) * (strlen(p_tok) + 1));
+        char *tmp = (char *)malloc(sizeof(char) * (strlen(p_tok) + 1));
         strcpy(tmp, p_tok);
         tar_arr[tar_arr_len] = tmp;
         tar_arr_len++;
@@ -582,7 +581,7 @@ char** uncommonFromSentences(char* s1, char* s2, int* returnSize)
 
         if (j == tar_arr_len) {
             // 仅出现一次
-            char *tmp = (char*)malloc(sizeof(char) * (strlen(tar_arr[i]) + 1));
+            char *tmp = (char *)malloc(sizeof(char) * (strlen(tar_arr[i]) + 1));
             strcpy(tmp, tar_arr[i]);
             ans_arr[*returnSize] = tmp;
             *returnSize += 1;
@@ -599,10 +598,10 @@ char** uncommonFromSentences(char* s1, char* s2, int* returnSize)
     return ans_arr;
 }
 
-int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSizesSize, int* returnSize)
+int *fairCandySwap(int *aliceSizes, int aliceSizesSize, int *bobSizes, int bobSizesSize, int *returnSize)
 {
     /* 由数学计算可知，2*(x1-x2) = k; (m1 + x1) - (m2 + x2) = k*/
-    
+
     /* 采用 hash 数据结构实现 */
     int sum_alic = 0;
     int sum_bob = 0;
@@ -621,10 +620,10 @@ int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSi
     int k = sum_alic - sum_bob;
 
     /* 查找数据 */
-    int *ans = (int*)malloc(sizeof(int) * 2);
+    int *ans = (int *)malloc(sizeof(int) * 2);
     *returnSize = 2;
 
-    for (int i = 0; i <aliceSizesSize; i++) {
+    for (int i = 0; i < aliceSizesSize; i++) {
         int alic = aliceSizes[i];
         int bob = alic - (k / 2);
 
@@ -641,8 +640,7 @@ int* fairCandySwap(int* aliceSizes, int aliceSizesSize, int* bobSizes, int bobSi
     return ans;
 }
 
-
-int surfaceArea(int** grid, int gridSize, int* gridColSize)
+int surfaceArea(int **grid, int gridSize, int *gridColSize)
 {
     int area_sum = 0;
     int min_hight = 0;
@@ -656,13 +654,13 @@ int surfaceArea(int** grid, int gridSize, int* gridColSize)
 
             /* 下一行需要剪掉的面积 */
             if (row < gridSize - 1) {
-                min_hight = min_int(grid[row][col], grid[row+1][col]);
+                min_hight = min_int(grid[row][col], grid[row + 1][col]);
                 area_sum -= min_hight * 2;
             }
 
             /* 下一列需要剪掉的面积 */
             if (col < gridColSize[row] - 1) {
-                min_hight = min_int(grid[row][col], grid[row][col+1]);
+                min_hight = min_int(grid[row][col], grid[row][col + 1]);
                 area_sum -= min_hight * 2;
             }
         }
@@ -671,7 +669,7 @@ int surfaceArea(int** grid, int gridSize, int* gridColSize)
     return area_sum;
 }
 
-bool isMonotonic(int* nums, int numsSize)
+bool isMonotonic(int *nums, int numsSize)
 {
     /* 数据趋势标志 */
     int k = 0;
@@ -702,10 +700,10 @@ bool isMonotonic(int* nums, int numsSize)
 }
 
 /*  ================================ */
-struct TreeNode* createRightTree(struct TreeNode* root, int val)
+struct TreeNode *createRightTree(struct TreeNode *root, int val)
 {
     /* 创建一个新的节点 */
-    struct TreeNode* node = (struct TreeNode*)malloc(sizeof(struct TreeNode));
+    struct TreeNode *node = (struct TreeNode *)malloc(sizeof(struct TreeNode));
     node->left = NULL;
     node->right = NULL;
     node->val = val;
@@ -719,7 +717,7 @@ struct TreeNode* createRightTree(struct TreeNode* root, int val)
     return node;
 }
 
-void treeNodeBST(struct TreeNode* root, struct TreeNode** p, struct TreeNode** head)
+void treeNodeBST(struct TreeNode *root, struct TreeNode **p, struct TreeNode **head)
 {
     /* 中序遍历 */
     if (root == NULL) {
@@ -739,7 +737,7 @@ void treeNodeBST(struct TreeNode* root, struct TreeNode** p, struct TreeNode** h
     treeNodeBST(root->right, p, head);
 }
 
-struct TreeNode* increasingBST(struct TreeNode* root)
+struct TreeNode *increasingBST(struct TreeNode *root)
 {
     struct TreeNode *p = NULL;
     struct TreeNode *head = NULL;
@@ -748,10 +746,10 @@ struct TreeNode* increasingBST(struct TreeNode* root)
     return head;
 }
 
-int* sortArrayByParity(int* nums, int numsSize, int* returnSize)
+int *sortArrayByParity(int *nums, int numsSize, int *returnSize)
 {
     /* 双指针法 偶数在前，奇数在后 */
-    int *ans_arr = (int*)malloc(sizeof(int) * numsSize);
+    int *ans_arr = (int *)malloc(sizeof(int) * numsSize);
     *returnSize = numsSize;
 
     int left = 0, right = numsSize - 1;
@@ -780,7 +778,7 @@ int* sortArrayByParity(int* nums, int numsSize, int* returnSize)
     return ans_arr;
 }
 
-int smallestRangeI(int* nums, int numsSize, int k)
+int smallestRangeI(int *nums, int numsSize, int k)
 {
     /* 直接对数组元素进行排序处理 */
     fast_sort(nums, 0, numsSize - 1);
@@ -808,12 +806,12 @@ void hasGroupMap(map_int_t *map, int *nums, int *len)
     hasGroupMap(map->right, nums, len);
 }
 
-bool hasGroupsSizeX(int* deck, int deckSize)
+bool hasGroupsSizeX(int *deck, int deckSize)
 {
     if (deckSize <= 1) {
         return false;
     }
-    
+
     /* hash_map 构建数据结构 */
     map_int_t *map = NULL;
     for (int i = 0; i < deckSize; i++) {
@@ -821,7 +819,7 @@ bool hasGroupsSizeX(int* deck, int deckSize)
     }
 
     /* 查询所有节点，是否存在公约数 */
-    int *nums = (int*)malloc(sizeof(int) * deckSize);
+    int *nums = (int *)malloc(sizeof(int) * deckSize);
     int len = 0;
     hasGroupMap(map, nums, &len);
 
@@ -841,10 +839,10 @@ bool hasGroupsSizeX(int* deck, int deckSize)
     return true;
 }
 
-char* reverseOnlyLetters(char* s)
+char *reverseOnlyLetters(char *s)
 {
     int len = strlen(s);
-    char *ans = (char*)malloc(sizeof(char) * (len + 1));
+    char *ans = (char *)malloc(sizeof(char) * (len + 1));
     strcpy(ans, s);
 
     int left = 0, right = len - 1;
@@ -873,7 +871,7 @@ char* reverseOnlyLetters(char* s)
     return ans;
 }
 
-int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
+int *sortArrayByParityII(int *nums, int numsSize, int *returnSize)
 {
     if (numsSize % 2 != 0) {
         *returnSize = 0;
@@ -881,7 +879,7 @@ int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
     }
 
     /* 创建数组 */
-    int *ans = (int*)malloc(sizeof(int) * numsSize);
+    int *ans = (int *)malloc(sizeof(int) * numsSize);
     *returnSize = numsSize;
     int id_i = 0, id_j = 1;
     for (int i = 0; i < numsSize; i++) {
@@ -899,7 +897,7 @@ int* sortArrayByParityII(int* nums, int numsSize, int* returnSize)
     return ans;
 }
 
-bool isLongPressedName(char* name, char* typed)
+bool isLongPressedName(char *name, char *typed)
 {
     /* 顺序查找，保证name，type中的字符顺序保持一致 */
     int name_len = strlen(name);
@@ -911,28 +909,24 @@ bool isLongPressedName(char* name, char* typed)
 
     while (name_id < name_len - 1) {
         /* 查找 name 中相同字符的长度 */
-        while ((name_id < name_len - 1) && 
-              (name[name_id] == name[name_id + 1])) {
+        while ((name_id < name_len - 1) && (name[name_id] == name[name_id + 1])) {
             name_id++;
             name_count++;
         }
 
         /* 查找 typed 中相同字符的长度 */
-        while ((typed_id < typed_len - 1) &&
-              (typed[typed_id] == typed[typed_id + 1])) {
+        while ((typed_id < typed_len - 1) && (typed[typed_id] == typed[typed_id + 1])) {
             typed_id++;
             typed_count++;
         }
 
         /* typed_id 先到*/
-        if ((name_id < name_len - 1) &&
-           (typed_id >= typed_len - 1)) {
+        if ((name_id < name_len - 1) && (typed_id >= typed_len - 1)) {
             return false;
         }
 
         /* 判断长度 内容判断 */
-        if ((typed_count < name_count) || 
-           (name[name_id] != typed[typed_id])) {
+        if ((typed_count < name_count) || (name[name_id] != typed[typed_id])) {
             return false;
         } else {
             name_count = 1;
@@ -953,13 +947,13 @@ bool isLongPressedName(char* name, char* typed)
     return true;
 }
 
-int numUniqueEmails(char** emails, int emailsSize)
+int numUniqueEmails(char **emails, int emailsSize)
 {
-    char **ans = (char**)malloc(sizeof(char*) * emailsSize);
+    char **ans = (char **)malloc(sizeof(char *) * emailsSize);
     int ans_len = 0;
 
     for (int i = 0; i < emailsSize; i++) {
-        char *buf = (char*)malloc(sizeof(char) * (strlen(emails[i]) + 1));
+        char *buf = (char *)malloc(sizeof(char) * (strlen(emails[i]) + 1));
         int buf_len = 0;
 
         char *em = emails[i];
@@ -1015,16 +1009,15 @@ int numUniqueEmails(char** emails, int emailsSize)
     return ans_len;
 }
 
-
 /* 类 */
-RecentCounter* recentCounterCreate()
+RecentCounter *recentCounterCreate()
 {
-    RecentCounter* ans = (RecentCounter*)malloc(sizeof(RecentCounter));
+    RecentCounter *ans = (RecentCounter *)malloc(sizeof(RecentCounter));
     ans->queue = create_loop_queue_int(3010);
     return ans;
 }
 
-int recentCounterPing(RecentCounter* obj, int t)
+int recentCounterPing(RecentCounter *obj, int t)
 {
     /* 先去掉不满足条件的数据 */
     while (!is_empty_loop_queue_int(obj->queue)) {
@@ -1043,14 +1036,13 @@ int recentCounterPing(RecentCounter* obj, int t)
     return obj->queue->size;
 }
 
-void recentCounterFree(RecentCounter* obj)
+void recentCounterFree(RecentCounter *obj)
 {
     free_loop_queue_int(obj->queue);
     free(obj);
 }
 
-
-void rangeNodeBST(struct TreeNode* root, int low, int high, int *sum)
+void rangeNodeBST(struct TreeNode *root, int low, int high, int *sum)
 {
     if (root == NULL) {
         return;
@@ -1065,7 +1057,7 @@ void rangeNodeBST(struct TreeNode* root, int low, int high, int *sum)
     rangeNodeBST(root->right, low, high, sum);
 }
 
-int rangeSumBST(struct TreeNode* root, int low, int high)
+int rangeSumBST(struct TreeNode *root, int low, int high)
 {
     /* 创建数组 */
     int sum = 0;
@@ -1073,7 +1065,7 @@ int rangeSumBST(struct TreeNode* root, int low, int high)
     return sum;
 }
 
-bool validMountainArray(int* arr, int arrSize)
+bool validMountainArray(int *arr, int arrSize)
 {
     if (arrSize < 3) {
         return false;
@@ -1097,11 +1089,11 @@ bool validMountainArray(int* arr, int arrSize)
     return left == right;
 }
 
-int* diStringMatch(char* s, int* returnSize)
+int *diStringMatch(char *s, int *returnSize)
 {
     /* 出现 I 则获取较小值，出现 D 则获取较大值 */
     int s_len = strlen(s);
-    int *ans = (int*)malloc(sizeof(int) * (s_len + 1));
+    int *ans = (int *)malloc(sizeof(int) * (s_len + 1));
     *returnSize = s_len + 1;
 
     /* [0, s_len] */
@@ -1122,7 +1114,7 @@ int* diStringMatch(char* s, int* returnSize)
     return ans;
 }
 
-int minDeletionSize(char** strs, int strsSize)
+int minDeletionSize(char **strs, int strsSize)
 {
     int row = strsSize;
     if (row <= 1) {
@@ -1144,7 +1136,7 @@ int minDeletionSize(char** strs, int strsSize)
     return sum;
 }
 
-bool isAlienSorted(char** words, int wordsSize, char* order)
+bool isAlienSorted(char **words, int wordsSize, char *order)
 {
     /* 构建 order 哈希表 */
     int hash_order[30];
@@ -1163,7 +1155,7 @@ bool isAlienSorted(char** words, int wordsSize, char* order)
 
         /* 寻找不同字符出现的位置 */
         int k = 0;
-        int len = cur_len < next_len? cur_len : next_len;
+        int len = cur_len < next_len ? cur_len : next_len;
         for (k = 0; k < len; k++) {
             if (cur[k] != next[k]) {
                 break;
@@ -1172,9 +1164,7 @@ bool isAlienSorted(char** words, int wordsSize, char* order)
 
         /* 根据 k 值做边界判断 */
         if (k == cur_len && k == next_len) {
-
         } else if (k == cur_len) {
-            
         } else if (k == next_len) {
             return false;
         } else if (hash_order[cur[k] - 'a'] > hash_order[next[k] - 'a']) {
@@ -1185,7 +1175,7 @@ bool isAlienSorted(char** words, int wordsSize, char* order)
     return true;
 }
 
-int repeatedNTimes(int* nums, int numsSize)
+int repeatedNTimes(int *nums, int numsSize)
 {
     /* 快排 从小到大 */
     fast_sort(nums, 0, numsSize - 1);
@@ -1200,7 +1190,7 @@ int repeatedNTimes(int* nums, int numsSize)
     return -1;
 }
 
-bool isUnivalTree(struct TreeNode* root)
+bool isUnivalTree(struct TreeNode *root)
 {
     if (root == NULL) {
         return true;
@@ -1220,7 +1210,7 @@ bool isUnivalTree(struct TreeNode* root)
     return isUnivalTree(root->left) && isUnivalTree(root->right);
 }
 
-int largestPerimeter(int* nums, int numsSize)
+int largestPerimeter(int *nums, int numsSize)
 {
     /* 快排 从小到大 */
     fast_sort(nums, 0, numsSize - 1);
@@ -1238,16 +1228,16 @@ int largestPerimeter(int* nums, int numsSize)
         }
 
         if (sum != 0) {
-                break;
+            break;
         }
     }
 
     return sum;
 }
 
-int* sortedSquares(int* nums, int numsSize, int* returnSize)
+int *sortedSquares(int *nums, int numsSize, int *returnSize)
 {
-    int *ans = (int*)malloc(sizeof(int) * numsSize);
+    int *ans = (int *)malloc(sizeof(int) * numsSize);
     *returnSize = numsSize;
 
     /* 平方 */
@@ -1259,7 +1249,7 @@ int* sortedSquares(int* nums, int numsSize, int* returnSize)
     return ans;
 }
 
-int* addToArrayForm(int* num, int numSize, int k, int* returnSize)
+int *addToArrayForm(int *num, int numSize, int k, int *returnSize)
 {
     /* 将 k 入栈 */
     stack_t *stack = create_stack(100);
@@ -1283,7 +1273,7 @@ typedef struct
     struct TreeNode *y_parent;
 } sdf_t;
 
-void searchSDF(struct TreeNode* root, sdf_t *sdf, int flower, struct TreeNode* parent)
+void searchSDF(struct TreeNode *root, sdf_t *sdf, int flower, struct TreeNode *parent)
 {
     if (root == NULL) {
         return;
@@ -1313,7 +1303,7 @@ void searchSDF(struct TreeNode* root, sdf_t *sdf, int flower, struct TreeNode* p
     searchSDF(root->right, sdf, flower + 1, root);
 }
 
-bool isCousins(struct TreeNode* root, int x, int y)
+bool isCousins(struct TreeNode *root, int x, int y)
 {
     sdf_t sdf = {
         .x = x,
@@ -1323,11 +1313,10 @@ bool isCousins(struct TreeNode* root, int x, int y)
         .x_find = false,
         .y_find = false,
         .x_parent = NULL,
-        .y_parent = NULL
-    };
+        .y_parent = NULL};
 
     searchSDF(root, &sdf, 0, NULL);
-    
+
     if ((sdf.x_flower == sdf.y_flower) && (sdf.x_parent != sdf.y_parent)) {
         return true;
     } else {
@@ -1335,7 +1324,6 @@ bool isCousins(struct TreeNode* root, int x, int y)
     }
 }
 
-int findJudge(int n, int** trust, int trustSize, int* trustColSize)
+int findJudge(int n, int **trust, int trustSize, int *trustColSize)
 {
-    
 }

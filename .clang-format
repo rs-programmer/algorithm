@@ -66,7 +66,7 @@ BraceWrapping:
   # enum定义后面
   AfterEnum: false
   # 函数定义后面
-  AfterFunction: false
+  AfterFunction: true
   # 命名空间定义后面
   AfterNamespace: false
   # struct定义后面
