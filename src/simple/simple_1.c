@@ -1,7 +1,6 @@
 #include "simple_1.h"
 
-int largestSumAfterKNegations(int* nums, int numsSize, int k)
-{
+int largestSumAfterKNegations(int *nums, int numsSize, int k) {
     /* fast_sort 从小到大排序 */
     fast_sort(nums, 0, numsSize - 1);
 
@@ -37,13 +36,12 @@ int largestSumAfterKNegations(int* nums, int numsSize, int k)
     return ans;
 }
 
-int bitwiseComplement(int n)
-{
+int bitwiseComplement(int n) {
     if (n == 0) {
         return 1;
     }
     /* 使用链表的尾插法保存 n 的二进制数据 */
-    link_t* link = create_link();
+    link_t *link = create_link();
     while (n) {
         append_link(link, n % 2);
         n /= 2;
@@ -52,7 +50,7 @@ int bitwiseComplement(int n)
     /* 链表元素取反 */
     link_node_t *tmp = link->head;
     while (tmp != NULL) {
-        tmp->val = tmp->val == 0? 1 : 0;
+        tmp->val = tmp->val == 0 ? 1 : 0;
         tmp = tmp->next;
     }
 
@@ -70,8 +68,7 @@ int bitwiseComplement(int n)
     return ans;
 }
 
-bool canThreePartsEqualSum(int* arr, int arrSize)
-{
+bool canThreePartsEqualSum(int *arr, int arrSize) {
     /* 计算和 */
     int sum = 0;
     for (int i = 0; i < arrSize; i++) {
@@ -115,9 +112,8 @@ bool canThreePartsEqualSum(int* arr, int arrSize)
     return true;
 }
 
-bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize)
-{
-    bool *ans = (bool*)malloc(sizeof(bool) * numsSize);
+bool *prefixesDivBy5(int *nums, int numsSize, int *returnSize) {
+    bool *ans = (bool *)malloc(sizeof(bool) * numsSize);
     int ans_len = 0;
 
     /* 循环计算 */
@@ -138,12 +134,11 @@ bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize)
     return ans;
 }
 
-char* removeOuterParentheses(char* s)
-{
+char *removeOuterParentheses(char *s) {
     int num = 0;
     int cur = 0;
     int s_len = strlen(s);
-    char *ans = (char*)malloc(sizeof(char) * s_len);
+    char *ans = (char *)malloc(sizeof(char) * s_len);
     int ans_len = 0;
 
     for (int i = 0; i < s_len; i++) {
@@ -171,8 +166,7 @@ char* removeOuterParentheses(char* s)
     return ans;
 }
 
-void sumNode(struct TreeNode* root, int sum, int *total)
-{
+void sumNode(struct TreeNode *root, int sum, int *total) {
     sum <<= 1;
     sum |= root->val;
     if (root->left == root->right && root->left == NULL) {
@@ -190,8 +184,7 @@ void sumNode(struct TreeNode* root, int sum, int *total)
     }
 }
 
-int sumRootToLeaf(struct TreeNode* root)
-{
+int sumRootToLeaf(struct TreeNode *root) {
     int total = 0;
     if (root == NULL) {
         return 0;
@@ -201,8 +194,45 @@ int sumRootToLeaf(struct TreeNode* root)
     return total;
 }
 
-bool divisorGame(int n)
-{
+bool divisorGame(int n) {
     /* 偶数赢 奇数输 */
-    return !(n&1);
+    return !(n & 1);
+}
+
+int *kWeakestRows(int **mat, int matSize, int *matColSize, int k, int *returnSize) {
+    int row = matSize;
+    int col = matColSize[0];
+    /* 统计每一行的军人数目 */
+    int *soldier_num = (int *)calloc((row + 1), sizeof(int));
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; ((j < col) && (mat[i][j] != 0)); j++) {
+            soldier_num[i]++;
+        }
+    }
+
+    /* 增加一个哨兵 */
+    soldier_num[row] = col + 1;
+
+    /* 查找最弱的 k 行 */
+    int *ans = (int *)malloc(sizeof(int) * k);
+    for (int i = 0; i < k; i++) {
+        int min_id = row;
+        for (int j = 0; j < row; j++) {
+            if (soldier_num[j] != -1 && soldier_num[j] < soldier_num[min_id]) {
+                min_id = j;
+            }
+        }
+
+        if (min_id == row) {
+            break;
+        }
+
+        /* 保存数据 */
+        ans[i] = min_id;
+        soldier_num[min_id] = -1;
+    }
+
+    free(soldier_num);
+    *returnSize = k;
+    return ans;
 }

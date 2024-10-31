@@ -17,12 +17,13 @@
 
 #include "type.h"
 
-int largestSumAfterKNegations(int* nums, int numsSize, int k);
+int largestSumAfterKNegations(int *nums, int numsSize, int k);
 int bitwiseComplement(int n);
-bool canThreePartsEqualSum(int* arr, int arrSize);
-bool* prefixesDivBy5(int* nums, int numsSize, int* returnSize);
-char* removeOuterParentheses(char* s);
-int sumRootToLeaf(struct TreeNode* root);
+bool canThreePartsEqualSum(int *arr, int arrSize);
+bool *prefixesDivBy5(int *nums, int numsSize, int *returnSize);
+char *removeOuterParentheses(char *s);
+int sumRootToLeaf(struct TreeNode *root);
 bool divisorGame(int n);
+int *kWeakestRows(int **mat, int matSize, int *matColSize, int k, int *returnSize);
 
 #endif
