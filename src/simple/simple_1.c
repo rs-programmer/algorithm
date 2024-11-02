@@ -245,3 +245,92 @@ int *kWeakestRows(int **mat, int matSize, int *matColSize, int k, int *returnSiz
     *returnSize = k;
     return ans;
 }
+
+int numberOfSteps(int num)
+{
+    int cnt = 0;
+    while (num != 0) {
+        if (num % 2 == 0) {
+            num /= 2;
+        } else {
+            num -= 1;
+        }
+
+        cnt++;
+    }
+
+    return cnt;
+}
+
+bool checkIfExist(int *arr, int arrSize)
+{
+    for (int i = 0; i < arrSize; i++) {
+        for (int j = 0; j < arrSize; j++) {
+            if ((i != j) && (arr[i] * 2 == arr[j])) {
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+int countNegatives(int **grid, int gridSize, int *gridColSize)
+{
+    int row = gridSize;
+    int col = gridColSize[0];
+    int cnt = 0;
+
+    int new_col = col;
+    for (int i = 0; i < row; i++) {
+        for (int j = 0; j < new_col; j++) {
+            if (grid[i][j] < 0) {
+                cnt += (new_col - j) * (row - i);
+                new_col = j;
+                break;
+            }
+        }
+    }
+
+    return cnt;
+}
+
+bool cmp_one(int *a, int *b)
+{
+    /* *a 中 1 的个数 */
+    int one_a = 0, one_b = 0;
+    int tmp_a = *a, tmp_b = *b;
+
+    while (tmp_a != 0 || tmp_b != 0) {
+        if (tmp_a != 0) {
+            if (tmp_a & 0x01 == 1) {
+                one_a++;
+            }
+            tmp_a >>= 1;
+        }
+
+        if (tmp_b != 0) {
+            if (tmp_b & 0x01 == 1) {
+                one_b++;
+            }
+            tmp_b >>= 1;
+        }
+    }
+
+    if (one_a == one_b) {
+        return (*a) > (*b);
+    } else {
+        return one_a > one_b;
+    }
+}
+
+int *sortByBits(int *arr, int arrSize, int *returnSize)
+{
+    int *ans = (int*)malloc(sizeof(int) * arrSize);
+    memcpy(ans, arr, sizeof(int) * arrSize);
+
+    /* 自定义排序算法 */
+    qsort(ans, arrSize, sizeof(int), cmp_one);
+    *returnSize = arrSize;
+    return ans;
+}

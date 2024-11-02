@@ -25,5 +25,10 @@ char *removeOuterParentheses(char *s);
 int sumRootToLeaf(struct TreeNode *root);
 bool divisorGame(int n);
 int *kWeakestRows(int **mat, int matSize, int *matColSize, int k, int *returnSize);
+int numberOfSteps(int num);
+bool checkIfExist(int *arr, int arrSize);
+int countNegatives(int **grid, int gridSize, int *gridColSize);
+int *sortByBits(int *arr, int arrSize, int *returnSize);
+
 
 #endif
