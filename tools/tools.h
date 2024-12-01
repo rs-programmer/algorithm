@@ -24,4 +24,6 @@ int gcd(int m, int n);
 
 bool isChar(char c);
 
+bool isLeap(int year);
+
 #endif

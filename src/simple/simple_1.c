@@ -326,11 +326,278 @@ bool cmp_one(int *a, int *b)
 
 int *sortByBits(int *arr, int arrSize, int *returnSize)
 {
-    int *ans = (int*)malloc(sizeof(int) * arrSize);
+    int *ans = (int *)malloc(sizeof(int) * arrSize);
     memcpy(ans, arr, sizeof(int) * arrSize);
 
     /* 自定义排序算法 */
     qsort(ans, arrSize, sizeof(int), cmp_one);
     *returnSize = arrSize;
     return ans;
+}
+
+int getDate(char *date)
+{
+    int y, m, d;
+    int month[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    sscanf(date, "%d-%d-%d", &y, &m, &d);
+
+    /* year */
+    int sum = 0;
+    for (int i = 1970; i < y; i++) {
+        if (isLeap(i)) {
+            sum += 366;
+        } else {
+            sum += 365;
+        }
+    }
+
+    /* month */
+    for (int i = 1; i < m; i++) {
+        sum += month[i];
+        if ((i == 2) && (isLeap(y))) {
+            sum += 1;
+        }
+    }
+
+    /* day */
+    sum += d;
+
+    return sum;
+}
+
+int daysBetweenDates(char *date1, char *date2)
+{
+    int sum1 = getDate(date1);
+    int sum2 = getDate(date2);
+
+    return abs(sum2 - sum1);
+}
+
+int *smallerNumbersThanCurrent(int *nums, int numsSize, int *returnSize)
+{
+    int *ans = (int *)malloc(sizeof(int) * numsSize);
+    *returnSize = 0;
+
+    for (int i = 0; i < numsSize; i++) {
+        int cnt = 0;
+        for (int j = 0; j < numsSize; j++) {
+            if (i != j && nums[j] < nums[i]) {
+                cnt++;
+            }
+        }
+
+        ans[*returnSize] = cnt;
+        *returnSize += 1;
+    }
+
+    return ans;
+}
+
+bool cmp(char *a, char *b)
+{
+    return *a > *b;
+}
+
+char *sortString(char *s)
+{
+    // copy
+    int s_len = strlen(s);
+    char *str = (char *)malloc(sizeof(char) * (s_len + 1));
+    strcpy(str, s);
+
+    // qsort
+    qsort(str, s_len, sizeof(char), cmp);
+    char *ans = (char *)malloc(sizeof(char) * (s_len + 1));
+    int ans_id = 0;
+    int cnt = 0;
+
+    while (cnt < s_len) {
+        // 选择最小字符
+        char min = '0';
+        for (int i = 0; i < s_len; i++) {
+            if (str[i] == '0') {
+                continue;
+            }
+
+            if (min == '0' || str[i] > min) {
+                min = str[i];
+                ans[ans_id++] = min;
+                str[i] = '0';
+                cnt++;
+            }
+        }
+
+        // 选择最大字符
+        char max = '0';
+        for (int i = s_len - 1; i >= 0; i--) {
+            if (str[i] == '0') {
+                continue;
+            }
+
+            if (max == '0' || str[i] < max) {
+                // 首次找到了最大字符
+                max = str[i];
+                ans[ans_id++] = max;
+                str[i] = '0';
+                cnt++;
+            }
+        }
+    }
+
+    ans[ans_id++] = '\0';
+    return ans;
+}
+
+char *generateTheString(int n)
+{
+    char *ans = (char *)malloc(sizeof(char) * (n + 1));
+    memset(ans, 'a', n);
+    if (n % 2 == 0) {
+        ans[n - 1] = 'b';
+    }
+
+    ans[n] = '\0';
+    return ans;
+}
+
+int *luckyNumbers(int **matrix, int matrixSize, int *matrixColSize, int *returnSize)
+{
+    int row = matrixSize;
+    int col = matrixColSize[0];
+    int *ans = (int *)malloc(sizeof(int) * row);
+    *returnSize = 0;
+
+    int min_id;
+    bool flag;
+    for (int i = 0; i < row; i++) {
+        min_id = 0;
+        flag = true;
+        for (int j = 0; j < col; j++) {
+            if (matrix[i][j] < matrix[i][min_id]) {
+                min_id = j;
+            }
+        }
+
+        for (int r = 0; r < row; r++) {
+            if (matrix[r][min_id] > matrix[i][min_id]) {
+                flag = false;
+                break;
+            }
+        }
+
+        if (flag) {
+            ans[*returnSize] = matrix[i][min_id];
+            *returnSize += 1;
+        }
+    }
+
+    return ans;
+}
+
+bool cmp_up(int *a, int *b)
+{
+    return *a > *b;
+}
+
+int findTheDistanceValue(int *arr1, int arr1Size, int *arr2, int arr2Size, int d)
+{
+    int id2 = 1;
+    int cnt = 0;
+    for (int i = 0; i < arr1Size; i++) {
+        int j = 0;
+        for (j = 0; j < arr2Size; j++) {
+            if (abs(arr1[i] - arr2[j]) <= d) {
+                break;
+            }
+        }
+
+        if (j == arr2Size) {
+            cnt++;
+        }
+    }
+
+    return cnt;
+}
+
+typedef struct target_arr {
+    int val;
+    struct target_arr *next;
+} target_arr_link;
+
+void insert(target_arr_link *head, int index, int val)
+{
+    int id = 0;
+    target_arr_link *parent = head;
+    target_arr_link *p = parent->next;
+
+    while (id < index) {
+        parent = p;
+        p = p->next;
+        id++;
+    }
+
+    // 插入
+    target_arr_link *tmp = (target_arr_link *)malloc(sizeof(target_arr_link));
+    tmp->val = val;
+    tmp->next = p;
+    parent->next = tmp;
+}
+
+int *createTargetArray(int *nums, int numsSize, int *index, int indexSize, int *returnSize)
+{
+    target_arr_link head;
+    head.next = NULL;
+
+    for (int i = 0; i < indexSize; i++) {
+        insert(&head, index[i], nums[i]);
+    }
+
+    int *ans = (int *)malloc(sizeof(int) * indexSize);
+    *returnSize = 0;
+    target_arr_link *p = head.next;
+    target_arr_link *tmp;
+    while (p != NULL) {
+        tmp = p->next;
+        ans[*returnSize] = p->val;
+        *returnSize += 1;
+        free(p);
+        p = tmp;
+    }
+
+    return ans;
+}
+
+bool cmp_down(int *a, int *b)
+{
+    return *b > *a;
+}
+
+int findLucky(int *arr, int arrSize)
+{
+    // 从大到小
+    qsort(arr, arrSize, sizeof(int), cmp_down);
+
+    // 查询第一个幸运数字
+    int id = 0, i;
+    for (i = 1; i < arrSize; i++) {
+        if (arr[i] != arr[id]) {
+            // 计算频次
+            if (arr[id] == (i - id)) {
+                return arr[id];
+            }
+
+            id = i;
+        }
+    }
+
+    // 计算频次
+    if (arr[id] == (i - id)) {
+        return arr[id];
+    }
+
+    return -1;
+}
+
+int countLargestGroup(int n)
+{
 }
